@@ -4,13 +4,28 @@ from collections.abc import Collection
 import muspy as mp
 from typing import Dict, List
 from muspy.utils import NOTE_MAP
-
-file_path = "amaj.mid"
-file_path2 = "symphon.mid"    
-midi_stream = mus.converter.parse(file_path)
-
+import numpy as np
+from numpy.typing import NDArray
 
 INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
+
+ALL_KEY_NOTE: Dict[str, int] = {
+
+    "C major": 0,
+    "C minor": 1,
+    "D major": 2,
+    "D minor": 3,
+    "E major": 4,
+    "E minor": 5,
+    "F major": 5,
+    "F minor": 6,
+    "G major": 7,
+    "G minor": 8,
+    "A major": 9,
+    "A minor": 10,
+    "B major": 11,
+    "B minor": 12,
+}
 
 def get_key_from_music21_stream(stream: mus.stream.base.Score, alg_name: str = "key.aarden")-> Collection[str, (int, int)]:
     # key.aarden
@@ -61,6 +76,28 @@ def similarity_key_score(music1: mp.Music, music2: mp.Music)-> float:
 
     return score/amount if(not amount == 0)  else amount
 
+def key_similarity_matrix(track_list: List[mp.Music])-> NDArray:
+    track_len = len(track_list)
+    similarity_matrix = np.zeros([track_len, track_len])
+    for row in range(track_len):
+        for col in range(track_len):
+            similarity_matrix[row, col] = similarity_key_score(track_list[row], track_list[col])
+    return similarity_matrix
+
+def keys_in_tracks_matrix(track_list:List[mp.Music])->NDArray:
+    track_len = len(track_list)
+    key_matrix = np.zeros([12, track_len])
+    for column in range(track_len):
+        for sign in track_list[column].key_signatures:
+            row = ALL_KEY_NOTE[ INVERT_NOTE_MAP[sign.root] + " " + sign.mode]
+            key_matrix[row, column] +=1
+    return key_matrix
+
+
+
+file_path = "amaj.mid"
+file_path2 = "symphon.mid"    
+midi_stream = mus.converter.parse(file_path)
 
 a, b = get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
 print(a)
@@ -73,3 +110,5 @@ print(get_key_from_muspy_music(track))
 print(compute_key_signatures_hist(track))
 print(similarity_key_score(track2, track))
 print(track.key_signatures)
+print(key_similarity_matrix([track, track2, track, track2]))
+
