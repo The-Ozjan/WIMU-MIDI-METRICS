@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import muspy as mp
 
 from setup_dataset import DATA_RAW_PATH, download_muspy_midi
-from wimu10 import self_similarity_matrix
+from wimu10.metrics import self_similarity_matrix
 from wimu10.tempo_utils import timestep_to_realtime
 
 # Prepare music instance

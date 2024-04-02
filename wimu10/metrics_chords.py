@@ -85,7 +85,7 @@ def get_chords_list(track: mp.Track, error_frame: int = 75) -> list[list[int]]:
     The returned chords are lists of MIDI note numbers.
 
     track: Track to retrive the chords list from.
-    error_frame: How much time can pass between single notes for them to still me in the same chord.
+    error_frame: How much time can pass between single notes for them to still be in the same chord.
     Due to the fact that notes can be inputed with delays(because of the playing style, human or machine error).
     This value is given to prevent a single bigger chord, where separte notes are played with slight delays and have different timestamps.
     At the time of programming and testing the initial value '75' was set and tested on the 'musicnet' dataset.
