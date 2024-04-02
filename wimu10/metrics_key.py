@@ -1,4 +1,4 @@
-import music21 as mus
+import music21 as m21
 from collections.abc import Collection
 import muspy as mp
 from typing import Dict, List
@@ -11,22 +11,32 @@ INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
 ALL_KEY_NOTE: Dict[str, int] = {
     'C major': 0,
     'C minor': 1,
-    'D major': 2,
-    'D minor': 3,
-    'E major': 4,
-    'E minor': 5,
-    'F major': 5,
-    'F minor': 6,
-    'G major': 7,
-    'G minor': 8,
-    'A major': 9,
-    'A minor': 10,
-    'B major': 11,
-    'B minor': 12,
+    'C# major': 2,
+    'C# minor': 3,
+    'D major': 4,
+    'D minor': 5,
+    'D# major': 6,
+    'D# minor': 7,
+    'E major': 8,
+    'E minor': 9,
+    'F major': 10,
+    'F minor': 11,
+    'F# major': 12,
+    'F# minor': 13,
+    'G major': 14,
+    'G minor': 15,
+    'G# major': 16,
+    'G# minor': 17,
+    'A major': 18,
+    'A minor': 19,
+    'A# major': 20,
+    'A# minor': 21,
+    'B major': 22,
+    'B minor': 23,
 }
 
 
-def get_key_from_music21_stream(stream: mus.stream.base.Score, alg_name: str = 'key.aarden') -> Collection[str, (int, int)]:
+def get_key_from_music21_stream(stream: m21.stream.base.Score, alg_name: str = 'key.aarden') -> Collection[str, (int, int)]:
     # key.aarden
     # key
     # key.krumhansl
@@ -102,20 +112,3 @@ def keys_in_tracks_matrix(track_list: List[mp.Music]) -> NDArray:
     return key_matrix
 
 
-file_path2 = f'WIMU-MIDI-METRICS\data\\raw\maestro\maestro-v3.0.0\{2018}\MIDI-Unprocessed_Schubert7-9_MID--AUDIO_16_R2_2018_wav.midi'
-file_path = 'WIMU-MIDI-METRICS\data\processed\dynamicsrand\dynamicsrand-003.mid'
-midi_stream = mus.converter.parse(file_path)
-
-a, b = get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
-print(a)
-
-track = mp.read_midi(file_path)
-track2 = mp.read_midi(file_path2)
-strin11 = mp.to_music21(track)
-print('aaala ', strin11.analyze('key'))
-print(get_key_from_muspy_music(track))
-print(compute_key_signatures_hist(track))
-print(similarity_key_score(track2, track))
-print(track.key_signatures)
-print(key_similarity_matrix([track, track2, track, track2]))
-print(keys_in_tracks_matrix([track, track, track2, track2]))
