@@ -30,3 +30,6 @@ print(key_list)
 y, x = mk.compute_key_signatures_hist(key_list)
 print(y)
 print(x)
+
+plt.bar(x, y)
+plt.show()
