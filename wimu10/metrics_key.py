@@ -5,6 +5,10 @@ from typing import Dict, List
 from muspy.utils import NOTE_MAP
 import numpy as np
 from numpy.typing import NDArray
+import mido
+from wimu10.midi_clip import midi_clip
+from wimu10.midi_duration import midi_duration
+import logging
 
 INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
 
@@ -111,4 +115,23 @@ def keys_in_tracks_matrix(track_list: List[mp.Music]) -> NDArray:
             key_matrix[row, column] += 1
     return key_matrix
 
+
+def get_keys_from_sampled_midi(midi: mido.MidiFile, sample_duration:float = 10.0, alg_name:str = "key.aarden", only_change:bool=False)->List[Collection[(str, float)]]:
+    #midi = mp.to_mido(music)
+    ori_ratio = midi_duration(midi)
+    begin = 0.0
+    key_list = []
+    list_index = 0
+    while begin + sample_duration <= ori_ratio:
+        cutted = midi_clip(midi,begin,begin+sample_duration)
+        cutted_muspy = mp.from_mido(cutted)
+        try:
+            key, metrics = get_key_from_muspy_music(cutted_muspy, alg_name=alg_name)
+            if(not only_change or list_index == 0 or not key_list[-1][0] == key):
+                key_list.append((key, begin))
+        except:
+            logging.error("Couldn't compute key")
+        begin += sample_duration/2
+        list_index += 1
+    return key_list
 

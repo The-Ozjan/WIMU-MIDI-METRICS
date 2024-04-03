@@ -1,12 +1,9 @@
 import music21 as m21
 import muspy as mp
 from pathlib import Path
-
 from setup_dataset import DATA_RAW_PATH, download_muspy_midi
 from wimu10 import metrics_key as mk
-
-# file_path2 = f'data\\raw\maestro\maestro-v3.0.0\{2018}\MIDI-Unprocessed_Schubert7-9_MID--AUDIO_16_R2_2018_wav.midi'
-# path = 'data/processed/dynamicsrand/dynamicsrand-003.mid'
+import mido
 
 # Prepare music instance
 dataset = 'maestro'
@@ -30,3 +27,6 @@ print(mk.compute_key_signatures_hist(track))
 print(track.key_signatures)
 # print(mk.key_similarity_matrix([track, track2, track, track2]))
 # print(mk.keys_in_tracks_matrix([track, track, track2, track2]))
+
+mid = mido.MidiFile(path)
+print(mk.get_keys_from_sampled_midi(mid, sample_duration= 10.0, only_change=True))
