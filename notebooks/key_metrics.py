@@ -4,6 +4,7 @@ from pathlib import Path
 from setup_dataset import DATA_RAW_PATH, download_muspy_midi
 from wimu10 import metrics_key as mk
 import mido
+import matplotlib.pyplot as plt
 
 # Prepare music instance
 dataset = 'maestro'
@@ -18,15 +19,14 @@ a, b = mk.get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeS
 print(a)
 
 track = mp.read_midi(path,backend="pretty_midi")
-# track = mp.load_json(path)
 strin11 = mp.to_music21(track)
 print('aaala ', strin11.analyze('key'))
 print(mk.get_key_from_muspy_music(track))
-print(mk.compute_key_signatures_hist(track))
-# print(mk.similarity_key_score(track2, track))
 print(track.key_signatures)
-# print(mk.key_similarity_matrix([track, track2, track, track2]))
-# print(mk.keys_in_tracks_matrix([track, track, track2, track2]))
 
 mid = mido.MidiFile(path)
-print(mk.get_keys_from_sampled_midi(mid, sample_duration= 10.0, only_change=True))
+key_list = mk.get_keys_from_sampled_midi(mid, sample_duration= 10.0, only_change=True)
+print(key_list)
+y, x = mk.compute_key_signatures_hist(key_list)
+print(y)
+print(x)

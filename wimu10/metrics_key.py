@@ -56,16 +56,14 @@ def get_key_from_muspy_music(music: mp.Music, alg_name: str = 'key.aarden') -> C
     return get_key_from_music21_stream(stream=stream, alg_name=alg_name)
 
 
-def compute_key_signatures_hist(music: mp.Music) -> Collection[List[int], List[int]]:
-    key_signature = music.key_signatures
-    hist_maj = [0] * 12
-    hist_min = [0] * 12
-    for key in key_signature:
-        if key.mode == 'major':
-            hist_maj[key.root] += 1
-        elif key.mode == 'minor':
-            hist_min[key.root] += 1
-    return hist_maj, hist_min
+def compute_key_signatures_hist(key_list: List[Collection[str, float]]) -> Collection[List[int], List[str]]:
+    key_dic = {}
+    for key, begin in key_list:
+        if key in key_dic.keys():
+            key_dic[key] += 1
+        else:
+            key_dic[key] = 1
+    return list(key_dic.values()), list(key_dic.keys())
 
 
 def similarity_key_score(music1: mp.Music, music2: mp.Music) -> float:
@@ -117,7 +115,6 @@ def keys_in_tracks_matrix(track_list: List[mp.Music]) -> NDArray:
 
 
 def get_keys_from_sampled_midi(midi: mido.MidiFile, sample_duration:float = 10.0, alg_name:str = "key.aarden", only_change:bool=False)->List[Collection[(str, float)]]:
-    #midi = mp.to_mido(music)
     ori_ratio = midi_duration(midi)
     begin = 0.0
     key_list = []
@@ -134,4 +131,3 @@ def get_keys_from_sampled_midi(midi: mido.MidiFile, sample_duration:float = 10.0
         begin += sample_duration/2
         list_index += 1
     return key_list
-
