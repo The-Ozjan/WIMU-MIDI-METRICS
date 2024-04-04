@@ -5,14 +5,19 @@ from setup_dataset import DATA_RAW_PATH, download_muspy_midi
 from wimu10 import metrics_key as mk
 import mido
 import matplotlib.pyplot as plt
+import numpy as np
+import os
 
 # Prepare music instance
 dataset = 'maestro'
+folder = '/maestro-v3.0.0/2018'
+files = range(0, 10)
 download_muspy_midi(dataset)
-# path = Path(DATA_RAW_PATH + dataset + '/_converted/0001.json')
+#path1 = Path(DATA_RAW_PATH + dataset + '/_converted/0001.json')
 path = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--2.midi')
 path2 = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber6_MID--AUDIO_20_R3_2018_wav--2.midi')
-# music = mp.load_json(path)
+#music = mp.load_json(path1)
+
 
 midi_stream = m21.converter.parse(path)
 # measures()
@@ -24,17 +29,24 @@ strin11 = mp.to_music21(track)
 print(mk.get_key_from_muspy_music(track))
 print(track.key_signatures)
 
-mid = mido.MidiFile(path)
-key_list = mk.get_keys_from_sampled_midi(mid, sample_duration= 10.0, only_change=True)
-print(key_list)
-y, x = mk.compute_key_signatures_hist(key_list)
+# Creating heatmap
+dataset_path = Path(DATA_RAW_PATH + dataset + folder)
+dir_list = os.listdir(dataset_path)
+tracks_keys = []
+for file in files:
+    p = Path(DATA_RAW_PATH + dataset + folder +'/'+dir_list[file])
+    key_list = mk.get_keys_from_sampled_midi(mido.MidiFile(p), sample_duration=40.0)
+    tracks_keys.append(key_list)
 
-mid2 = mido.MidiFile(path2)
-key_list2 = mk.get_keys_from_sampled_midi(mid2, sample_duration= 10.0, only_change=True)
-print("----")
-print(mk.keys_in_tracks_matrix([key_list, key_list2]))
-print("----")
-print(mk.key_similarity_matrix([key_list, key_list2,key_list]))
-
-plt.bar(x, y)
+labels = mk.ALL_KEY_NOTE.keys()
+fig, ax = plt.subplots(nrows=1, ncols=2)
+# Plot Heatmap for transition matrix
+matrix = mk.keys_in_tracks_matrix(tracks_keys)
+im = ax[0].imshow(matrix)
+ax[0].figure.colorbar(im, ax=ax[0])
+#ax[0].set_xticks(np.arange(len(labels)), labels=labels)
+ax[0].set_yticks(np.arange(len(labels)), labels=labels)
+plt.setp(ax[0].get_xticklabels(), rotation=90, ha='right', rotation_mode='anchor')
+ax[0].invert_yaxis()
+ax[0].set_title('Chord transition heatmap')
 plt.show()
