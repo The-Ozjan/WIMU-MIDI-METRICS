@@ -37,6 +37,18 @@ ALL_KEY_NOTE: Dict[str, int] = {
     'A# minor': 21,
     'B major': 22,
     'B minor': 23,
+    'C- major': 24,
+    'C- minor': 25,
+    'D- major': 26,
+    'D- minor': 27,
+    'E- major': 28,
+    'E- minor': 29,
+    'G- major': 30,
+    'G- minor': 31,
+    'A- major': 32,
+    'A- minor': 33,
+    'B- major': 34,
+    'B- minor': 35,
 }
 
 
@@ -66,36 +78,36 @@ def compute_key_signatures_hist(key_list: List[Collection[str, float]]) -> Colle
     return list(key_dic.values()), list(key_dic.keys())
 
 
-def similarity_key_score(music1: mp.Music, music2: mp.Music) -> float:
-    key1 = music1.key_signatures
-    key2 = music2.key_signatures
+def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: List[Collection[(str, float)]]) -> float:
     score = 0
     index_key1 = 0
     index_key2 = 0
     amount = 0
-    while index_key1 < len(key1) and index_key2 < len(key2):
+    while index_key1 < len(key_list1) and index_key2 < len(key_list2):
         amount += 1
-        if key1[index_key1].root == key2[index_key2].root:
+        key1_name = key_list1[index_key1][0].capitalize()
+        key2_name = key_list2[index_key2][0].capitalize()
+        if key1_name[0] == key2_name[0]:
             score += 0.5
-            if key1[index_key1].mode == key2[index_key2].mode:
+            if key1_name == key2_name:
                 score += 0.5
-        if index_key1 == len(key1) - 1 and index_key2 == len(key2) - 1:
+        if index_key1 == len(key_list1) - 1 and index_key2 == len(key_list2) - 1:
             index_key1 += 1
             index_key2 += 1
         else:
-            if index_key1 < len(key1) - 1 and (
-                len(key2) - 1 == index_key2 or key1[index_key1 + 1].time <= key2[index_key2 + 1].time
+            if index_key1 < len(key_list1) - 1 and (
+                len(key_list2) - 1 == index_key2 or key_list1[index_key1 + 1][1] <= key_list2[index_key2 + 1][1]
             ):
                 index_key1 += 1
-            if index_key2 < len(key2) - 1 and (
-                len(key1) - 1 == index_key1 or key2[index_key2 + 1].time <= key1[index_key1 + 1].time
+            if index_key2 < len(key_list2) - 1 and (
+                len(key_list1) - 1 == index_key1 or key_list2[index_key2 + 1][1] <= key_list1[index_key1 + 1][1]
             ):
                 index_key2 += 1
 
     return score / amount if (not amount == 0) else amount
 
 
-def key_similarity_matrix(track_list: List[mp.Music]) -> NDArray:
+def key_similarity_matrix(track_list: List[List[Collection[(str, float)]]]) -> NDArray:
     track_len = len(track_list)
     similarity_matrix = np.zeros([track_len, track_len])
     for row in range(track_len):
@@ -104,12 +116,12 @@ def key_similarity_matrix(track_list: List[mp.Music]) -> NDArray:
     return similarity_matrix
 
 
-def keys_in_tracks_matrix(track_list: List[mp.Music]) -> NDArray:
+def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]]) -> NDArray:
     track_len = len(track_list)
-    key_matrix = np.zeros([12, track_len])
+    key_matrix = np.zeros([len(ALL_KEY_NOTE), track_len])
     for column in range(track_len):
-        for sign in track_list[column].key_signatures:
-            row = ALL_KEY_NOTE[INVERT_NOTE_MAP[sign.root] + ' ' + sign.mode]
+        for key in track_list[column]:
+            row = ALL_KEY_NOTE[key[0].capitalize()]
             key_matrix[row, column] += 1
     return key_matrix
 

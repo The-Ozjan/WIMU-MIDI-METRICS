@@ -11,16 +11,16 @@ dataset = 'maestro'
 download_muspy_midi(dataset)
 # path = Path(DATA_RAW_PATH + dataset + '/_converted/0001.json')
 path = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--2.midi')
+path2 = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber6_MID--AUDIO_20_R3_2018_wav--2.midi')
 # music = mp.load_json(path)
 
 midi_stream = m21.converter.parse(path)
-
+# measures()
 a, b = mk.get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
 print(a)
-
-track = mp.read_midi(path,backend="pretty_midi")
+# 
+track = mp.read_midi(path)
 strin11 = mp.to_music21(track)
-print('aaala ', strin11.analyze('key'))
 print(mk.get_key_from_muspy_music(track))
 print(track.key_signatures)
 
@@ -28,8 +28,13 @@ mid = mido.MidiFile(path)
 key_list = mk.get_keys_from_sampled_midi(mid, sample_duration= 10.0, only_change=True)
 print(key_list)
 y, x = mk.compute_key_signatures_hist(key_list)
-print(y)
-print(x)
+
+mid2 = mido.MidiFile(path2)
+key_list2 = mk.get_keys_from_sampled_midi(mid2, sample_duration= 10.0, only_change=True)
+print("----")
+print(mk.keys_in_tracks_matrix([key_list, key_list2]))
+print("----")
+print(mk.key_similarity_matrix([key_list, key_list2,key_list]))
 
 plt.bar(x, y)
 plt.show()
