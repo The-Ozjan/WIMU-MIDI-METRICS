@@ -117,13 +117,13 @@ def key_similarity_matrix(track_list: List[List[Collection[(str, float)]]]) -> N
     return similarity_matrix
 
 
-def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]]) -> NDArray:
+def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]], norm:bool=True) -> NDArray:
     track_len = len(track_list)
     key_matrix = np.zeros([len(ALL_KEY_NOTE), track_len])
     for column in range(track_len):
         for key in track_list[column]:
             row = ALL_KEY_NOTE[key[0].capitalize()]
-            key_matrix[row, column] += 1
+            key_matrix[row, column] += 1/ len(track_list[column]) if( norm) else 1
     return key_matrix
 
 
@@ -145,22 +145,3 @@ def get_keys_from_sampled_midi(midi: mido.MidiFile, sample_duration:float = 10.0
         list_index += 1
     return key_list
 
-
-# key_list =  get_keys_from_sampled_midi(mido.MidiFile("amaj.mid"))
-# key_list2 = get_keys_from_sampled_midi(mido.MidiFile("symphon.mid"))
-
-# matrix = keys_in_tracks_matrix([key_list, key_list2])
-# matrix2 = key_similarity_matrix([key_list, key_list2,key_list])
-
-
-# labels = ALL_KEY_NOTE.keys()
-# fig, ax = plt.subplots(nrows=1, ncols=2)
-# # Plot Heatmap for transition matrix
-# im = ax[0].imshow(matrix)
-# ax[0].figure.colorbar(im, ax=ax[0])
-# ax[0].set_xticks(np.arange(len(labels)), labels=labels)
-# ax[0].set_yticks(np.arange(len(labels)), labels=labels)
-# plt.setp(ax[0].get_xticklabels(), rotation=90, ha='right', rotation_mode='anchor')
-# ax[0].invert_yaxis()
-# ax[0].set_title('Chord transition heatmap')
-# plt.show()
