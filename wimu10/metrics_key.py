@@ -9,7 +9,6 @@ import mido
 from wimu10.midi_clip import midi_clip
 from wimu10.midi_duration import midi_duration
 import logging
-import matplotlib.pyplot as plt
 
 INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
 
@@ -71,7 +70,7 @@ def get_key_from_muspy_music(music: mp.Music, alg_name: str = 'key.aarden') -> C
 
 def compute_key_signatures_hist(key_list: List[Collection[str, float]]) -> Collection[List[int], List[str]]:
     key_dic = {}
-    for key, begin in key_list:
+    for key, _ in key_list:
         if key in key_dic.keys():
             key_dic[key] += 1
         else:
@@ -117,31 +116,32 @@ def key_similarity_matrix(track_list: List[List[Collection[(str, float)]]]) -> N
     return similarity_matrix
 
 
-def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]], norm:bool=True) -> NDArray:
+def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]], norm: bool = True) -> NDArray:
     track_len = len(track_list)
     key_matrix = np.zeros([len(ALL_KEY_NOTE), track_len])
     for column in range(track_len):
         for key in track_list[column]:
             row = ALL_KEY_NOTE[key[0].capitalize()]
-            key_matrix[row, column] += 1/ len(track_list[column]) if( norm) else 1
+            key_matrix[row, column] += 1 / len(track_list[column]) if (norm) else 1
     return key_matrix
 
 
-def get_keys_from_sampled_midi(midi: mido.MidiFile, sample_duration:float = 10.0, alg_name:str = "key.aarden", only_change:bool=False)->List[Collection[(str, float)]]:
+def get_keys_from_sampled_midi(
+    midi: mido.MidiFile, sample_duration: float = 10.0, alg_name: str = 'key.aarden', only_change: bool = False
+) -> List[Collection[(str, float)]]:
     ori_ratio = midi_duration(midi)
     begin = 0.0
     key_list = []
     list_index = 0
     while begin + sample_duration <= ori_ratio:
-        cutted = midi_clip(midi,begin,begin+sample_duration)
+        cutted = midi_clip(midi, begin, begin + sample_duration)
         cutted_muspy = mp.from_mido(cutted)
         try:
             key, metrics = get_key_from_muspy_music(cutted_muspy, alg_name=alg_name)
-            if(not only_change or list_index == 0 or not key_list[-1][0] == key):
+            if not only_change or list_index == 0 or not key_list[-1][0] == key:
                 key_list.append((key, begin))
         except:
             logging.error("Couldn't compute key")
-        begin += sample_duration/2
+        begin += sample_duration / 2
         list_index += 1
     return key_list
-

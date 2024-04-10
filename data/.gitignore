@@ -7,3 +7,5 @@
 !processed/**
 !*.py
 !self_similarity_score.json
+!midi_with_keys
+!midi_with_keys/**

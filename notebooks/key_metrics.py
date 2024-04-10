@@ -11,31 +11,33 @@ import os
 # Parameters
 dataset = 'maestro'
 folder = '/maestro-v3.0.0/2018'
-files = range(0, 10)
+files = range(0, 4)
 is_hist = True
+alg = 'key.aarden'
+step = 30.0
 path_for_hist = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--2.midi')
 
 # Prepare music instance
 download_muspy_midi(dataset)
-#path1 = Path(DATA_RAW_PATH + dataset + '/_converted/0001.json')
+# path1 = Path(DATA_RAW_PATH + dataset + '/_converted/0001.json')
 path = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--2.midi')
 path2 = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber6_MID--AUDIO_20_R3_2018_wav--2.midi')
-#music = mp.load_json(path1)
+# music = mp.load_json(path1)
 
 # Tests
 midi_stream = m21.converter.parse(path)
 a, b = mk.get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
-print(a) 
+print(a)
 track = mp.read_midi(path)
 strin11 = mp.to_music21(track)
 print(mk.get_key_from_muspy_music(track))
 print(track.key_signatures)
 
 # Creating histogram
-if(is_hist):
-    list_for_hist = mk.get_keys_from_sampled_midi(mido.MidiFile(path_for_hist), sample_duration=30.0)
+if is_hist:
+    list_for_hist = mk.get_keys_from_sampled_midi(mido.MidiFile(path_for_hist), sample_duration=step, alg_name=alg)
     hist, lab = mk.compute_key_signatures_hist(list_for_hist)
-    plt.bar(lab,hist)
+    plt.bar(lab, hist)
     plt.show()
 
 # Creating heatmap
@@ -43,8 +45,8 @@ dataset_path = Path(DATA_RAW_PATH + dataset + folder)
 dir_list = os.listdir(dataset_path)
 tracks_keys = []
 for file in files:
-    p = Path(DATA_RAW_PATH + dataset + folder +'/'+dir_list[file])
-    key_list = mk.get_keys_from_sampled_midi(mido.MidiFile(p), sample_duration=40.0)
+    p = Path(DATA_RAW_PATH + dataset + folder + '/' + dir_list[file])
+    key_list = mk.get_keys_from_sampled_midi(mido.MidiFile(p), sample_duration=step, alg_name=alg)
     tracks_keys.append(key_list)
 
 labels = mk.ALL_KEY_NOTE.keys()
@@ -61,7 +63,7 @@ ax[0].set_title('Keys in tracks heatmap')
 similarity_matrix = mk.key_similarity_matrix(tracks_keys)
 im2 = ax[1].imshow(similarity_matrix)
 ax[1].figure.colorbar(im2, ax=ax[1])
-#ax[1].set_yticks(np.arange(len(labels)), labels=labels)
+# ax[1].set_yticks(np.arange(len(labels)), labels=labels)
 plt.setp(ax[1].get_xticklabels(), rotation=90, ha='right', rotation_mode='anchor')
 ax[1].set_title('Keys similarity in tracks heatmap')
 plt.show()
