@@ -141,7 +141,8 @@ def get_keys_from_sampled_midi(
             if not only_change or list_index == 0 or not key_list[-1][0] == key:
                 key_list.append((key, begin))
         except:
-            logging.error("Couldn't compute key")
+            # logging.error("Couldn't compute key")
+            pass
         begin += sample_duration / 2
         list_index += 1
     return key_list

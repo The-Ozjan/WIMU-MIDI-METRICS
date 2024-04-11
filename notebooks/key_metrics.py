@@ -11,11 +11,11 @@ import os
 # Parameters
 dataset = 'maestro'
 folder = '/maestro-v3.0.0/2018'
-files = range(0, 4)
+files = range(0, 5)
 is_hist = True
 alg = 'key.aarden'
-step = 30.0
-path_for_hist = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Chamber3_MID--AUDIO_10_R3_2018_wav--2.midi')
+step = 10.0
+path_for_hist = Path('data/midi_with_keys/C_major.mid')
 
 # Prepare music instance
 download_muspy_midi(dataset)
@@ -25,13 +25,13 @@ path2 = Path(DATA_RAW_PATH + dataset + '/maestro-v3.0.0/2018/MIDI-Unprocessed_Ch
 # music = mp.load_json(path1)
 
 # Tests
-midi_stream = m21.converter.parse(path)
-a, b = mk.get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
-print(a)
-track = mp.read_midi(path)
-strin11 = mp.to_music21(track)
-print(mk.get_key_from_muspy_music(track))
-print(track.key_signatures)
+# midi_stream = m21.converter.parse(path)
+# a, b = mk.get_key_from_music21_stream(midi_stream.measures(0, 20, collect='TimeSignature'))
+# print(a)
+# track = mp.read_midi(path)
+# strin11 = mp.to_music21(track)
+# print(mk.get_key_from_muspy_music(track))
+# print(track.key_signatures)
 
 # Creating histogram
 if is_hist:
@@ -41,11 +41,11 @@ if is_hist:
     plt.show()
 
 # Creating heatmap
-dataset_path = Path(DATA_RAW_PATH + dataset + folder)
-dir_list = os.listdir(dataset_path)
+dataset_path = 'data/midi_with_keys'
+dir_list = os.listdir(Path(dataset_path))
 tracks_keys = []
 for file in files:
-    p = Path(DATA_RAW_PATH + dataset + folder + '/' + dir_list[file])
+    p = Path(dataset_path + '/' + dir_list[file])
     key_list = mk.get_keys_from_sampled_midi(mido.MidiFile(p), sample_duration=step, alg_name=alg)
     tracks_keys.append(key_list)
 
