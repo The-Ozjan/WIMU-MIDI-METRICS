@@ -9,6 +9,7 @@ import mido
 from wimu10.midi_clip import midi_clip
 from wimu10.midi_duration import midi_duration
 import logging
+import copy
 
 INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
 
@@ -129,12 +130,12 @@ def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]], norm
 def get_keys_from_sampled_midi(
     midi: mido.MidiFile, sample_duration: float = 10.0, alg_name: str = 'key.aarden', only_change: bool = False
 ) -> List[Collection[(str, float)]]:
-    ori_ratio = midi_duration(midi)
+    ori_ratio = midi_duration(copy.deepcopy(midi))
     begin = 0.0
     key_list = []
     list_index = 0
     while begin + sample_duration <= ori_ratio:
-        cutted = midi_clip(midi, begin, begin + sample_duration)
+        cutted = midi_clip(copy.deepcopy(midi), begin, begin + sample_duration)
         cutted_muspy = mp.from_mido(cutted)
         try:
             key, metrics = get_key_from_muspy_music(cutted_muspy, alg_name=alg_name)
