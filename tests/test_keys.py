@@ -70,3 +70,43 @@ def test_compute_key_signatures_hist():
     assert list_names[1] == "C minor"
     assert list_names[2] == "A major"
     assert list_names[3] == "D minor"
+
+def test_similarity_key_score_same():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    assert mk.similarity_key_score(key_list, key_list) == 1.0
+
+def test_similarity_key_score_different():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    key_list2 = [("F major", 0), ("D major", 10), ("G- major", 20)]
+    assert mk.similarity_key_score(key_list, key_list2) == 0.0
+
+def test_similarity_key_score_some_similarities():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    key_list2 = [("C major", 0), ("C major", 10), ("G- major", 20)]
+    assert mk.similarity_key_score(key_list, key_list2) == 0.1875
+    key_list2 = [("C major", 0), ("C major", 15), ("A minor", 55),("G- major", 90)]
+    assert abs(mk.similarity_key_score(key_list, key_list2) - 0.363) <=  0.001
+
+def test_similarity_key_score_smaller_first():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    key_list2 = [("C major", 0), ("C major", 10), ("G- major", 20)]
+    assert mk.similarity_key_score(key_list2, key_list) == 0.1875
+    key_list2 = [("C major", 0), ("C major", 15), ("A minor", 55),("G- major", 90)]
+    assert abs(mk.similarity_key_score(key_list2, key_list) - 0.363) <=  0.001
+
+def test_key_similarity_matrix():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    key_list2 = [("C major", 0), ("C major", 10), ("G- major", 20)]
+    key_list3 = [("C major", 0), ("C major", 15), ("A minor", 55),("G- major", 90)]
+    key_list4 = [("F major", 0), ("D major", 10), ("G- major", 20)]
+    matrix = mk.key_similarity_matrix([key_list, key_list2, key_list3, key_list4, key_list])
+    assert matrix[0,0] == 1.0 
+    assert matrix[0,1] == 0.1875 and matrix[1,0] == 0.1875
+    assert abs( matrix[0,2] -0.363) <= 0.001 and abs( matrix[2,0] -0.363) <= 0.001
+    assert matrix[0,3] == 0.0 and matrix[3,0] == 0.0
+    assert matrix[0,4] == 1.0 and matrix[4,0] == 1.0
