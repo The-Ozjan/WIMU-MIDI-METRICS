@@ -90,7 +90,6 @@ def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: L
         amount += 1
         key1_name = key_list1[index_key1][0].capitalize()
         key2_name = key_list2[index_key2][0].capitalize()
-        print("index1: ", index_key1, "index2: ", index_key2)
         if key1_name[0] == key2_name[0]:
             score += 0.5
             if key1_name == key2_name:
@@ -102,12 +101,10 @@ def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: L
             if index_key1 < len(key_list1) - 1 and (
                 len(key_list2) - 1 == index_key2 or (key_list1[index_key1 + 1][1] <= key_list2[index_key2 + 1][1] and key_list1[index_key1 + 1][1] >= key_list2[index_key2][1])
             ):
-                #index_key1 += 1
                 is_index1_changed = True
             if index_key2 < len(key_list2) - 1 and (
                 len(key_list1) - 1 == index_key1 or (key_list2[index_key2 + 1][1] <= key_list1[index_key1 + 1][1] and key_list2[index_key2 + 1 ][1] >= key_list1[index_key1][1])
             ):
-                #ndex_key2 += 1
                 is_index2_changed = True
             
             if is_index1_changed:

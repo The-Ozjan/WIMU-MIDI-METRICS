@@ -110,3 +110,19 @@ def test_key_similarity_matrix():
     assert abs( matrix[0,2] -0.363) <= 0.001 and abs( matrix[2,0] -0.363) <= 0.001
     assert matrix[0,3] == 0.0 and matrix[3,0] == 0.0
     assert matrix[0,4] == 1.0 and matrix[4,0] == 1.0
+
+def test_keys_in_tracks_matrix():
+    key_list = [("C major", 0), ("C minor", 10), ("A major", 20), ("D minor", 30), ("C major", 40)
+                , ("A major", 50), ("A major", 60), ("C minor", 70)]
+    key_list2 = [("C major", 0), ("C major", 10), ("G- major", 20)]
+    key_list3 = [('E- major', 0), ('B minor', 15),("G- major", 90)]
+    matrix = mk.keys_in_tracks_matrix([key_list, key_list2, key_list3])
+    assert matrix[0, 0] == 2.0/8.0
+    assert matrix[1, 0] == 2.0/8.0
+    assert matrix[18, 0] == 3.0/8.0
+    assert matrix[5, 0] == 1.0/8.0
+    assert matrix[0, 1] == 2.0/3.0
+    assert matrix[30, 1] == 1.0/3.0
+    assert matrix[30, 2] == 1.0/3.0
+    assert matrix[28, 2] == 1.0/3.0
+    assert matrix[23, 2] == 1.0/3.0
