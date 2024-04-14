@@ -11,10 +11,10 @@ import os
 # Parameters
 dataset = 'maestro'
 folder = '/maestro-v3.0.0/2018'
-files = range(0, 5)
+files = range(0, 2)
 is_hist = True
 alg = 'key.aarden'
-step = 10.0
+step = 30.0
 path_for_hist = Path('data/midi_with_keys/C_major.mid')
 
 # Prepare music instance

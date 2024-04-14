@@ -1,7 +1,7 @@
 import music21 as m21
 from collections.abc import Collection
 import muspy as mp
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from muspy.utils import NOTE_MAP
 import numpy as np
 from numpy.typing import NDArray
@@ -10,6 +10,7 @@ from wimu10.midi_clip import midi_clip
 from wimu10.midi_duration import midi_duration
 import logging
 import copy
+from typing import Optional
 
 INVERT_NOTE_MAP: Dict[int, str] = {v: k for k, v in NOTE_MAP.items()}
 
@@ -53,7 +54,18 @@ ALL_KEY_NOTE: Dict[str, int] = {
 }
 
 
-def get_key_from_music21_stream(stream: m21.stream.base.Score, alg_name: str = 'key.aarden') -> Collection[str, (int, int)]:
+class PartKey:
+    def __init__(self, key: Optional[str] = None, begin: float = 0) -> None:
+        if not (begin >= 0 and (isinstance(begin, float) or isinstance(begin, int))):
+            raise ValueError
+        self.key = key
+        self.begin = begin
+
+
+MidiKeys = List[PartKey]
+
+
+def get_key_from_music21_stream(stream: m21.stream.base.Score, alg_name: str = 'key.aarden') -> Tuple[str, int, int]:
     # key.aarden
     # key
     # key.krumhansl
@@ -61,25 +73,25 @@ def get_key_from_music21_stream(stream: m21.stream.base.Score, alg_name: str = '
     # key.simple
     # key.temperley
     analize = stream.analyze(alg_name)
-    return str(analize), (analize.correlationCoefficient, analize.tonalCertainty())
+    return str(analize), analize.correlationCoefficient, analize.tonalCertainty()
 
 
-def get_key_from_muspy_music(music: mp.Music, alg_name: str = 'key.aarden') -> Collection[str, (int, int)]:
+def get_key_from_muspy_music(music: mp.Music, alg_name: str = 'key.aarden') -> Tuple[str, int, int]:
     stream = mp.to_music21(music)
     return get_key_from_music21_stream(stream=stream, alg_name=alg_name)
 
 
-def compute_key_signatures_hist(key_list: List[Collection[str, float]]) -> Collection[List[int], List[str]]:
+def compute_key_signatures_hist(key_list: MidiKeys) -> Tuple[List[int], List[str]]:
     key_dic = {}
-    for key, _ in key_list:
-        if key in key_dic.keys():
-            key_dic[key] += 1
+    for key in key_list:
+        if key.key in key_dic.keys():
+            key_dic[key.key] += 1
         else:
-            key_dic[key] = 1
+            key_dic[key.key] = 1
     return list(key_dic.values()), list(key_dic.keys())
 
 
-def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: List[Collection[(str, float)]]) -> float:
+def similarity_key_score(key_list1: MidiKeys, key_list2: MidiKeys) -> float:
     score = 0
     index_key1 = 0
     index_key2 = 0
@@ -88,8 +100,8 @@ def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: L
     is_index2_changed = False
     while index_key1 < len(key_list1) and index_key2 < len(key_list2):
         amount += 1
-        key1_name = key_list1[index_key1][0].capitalize()
-        key2_name = key_list2[index_key2][0].capitalize()
+        key1_name = key_list1[index_key1].key.capitalize()
+        key2_name = key_list2[index_key2].key.capitalize()
         if key1_name[0] == key2_name[0]:
             score += 0.5
             if key1_name == key2_name:
@@ -99,14 +111,22 @@ def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: L
             index_key2 += 1
         else:
             if index_key1 < len(key_list1) - 1 and (
-                len(key_list2) - 1 == index_key2 or (key_list1[index_key1 + 1][1] <= key_list2[index_key2 + 1][1] and key_list1[index_key1 + 1][1] >= key_list2[index_key2][1])
+                len(key_list2) - 1 == index_key2
+                or (
+                    key_list1[index_key1 + 1].begin <= key_list2[index_key2 + 1].begin
+                    and key_list1[index_key1 + 1].begin >= key_list2[index_key2].begin
+                )
             ):
                 is_index1_changed = True
             if index_key2 < len(key_list2) - 1 and (
-                len(key_list1) - 1 == index_key1 or (key_list2[index_key2 + 1][1] <= key_list1[index_key1 + 1][1] and key_list2[index_key2 + 1 ][1] >= key_list1[index_key1][1])
+                len(key_list1) - 1 == index_key1
+                or (
+                    key_list2[index_key2 + 1].begin <= key_list1[index_key1 + 1].begin
+                    and key_list2[index_key2 + 1].begin >= key_list1[index_key1].begin
+                )
             ):
                 is_index2_changed = True
-            
+
             if is_index1_changed:
                 index_key1 += 1
                 is_index1_changed = False
@@ -117,7 +137,7 @@ def similarity_key_score(key_list1: List[Collection[(str, float)]], key_list2: L
     return score / amount if (not amount == 0) else amount
 
 
-def key_similarity_matrix(track_list: List[List[Collection[(str, float)]]]) -> NDArray:
+def key_similarity_matrix(track_list: List[MidiKeys]) -> NDArray:
     track_len = len(track_list)
     similarity_matrix = np.zeros([track_len, track_len])
     for row in range(track_len):
@@ -126,30 +146,30 @@ def key_similarity_matrix(track_list: List[List[Collection[(str, float)]]]) -> N
     return similarity_matrix
 
 
-def keys_in_tracks_matrix(track_list: List[List[Collection[(str, float)]]], norm: bool = True) -> NDArray:
+def keys_in_tracks_matrix(track_list: List[MidiKeys], norm: bool = True) -> NDArray:
     track_len = len(track_list)
     key_matrix = np.zeros([len(ALL_KEY_NOTE), track_len])
     for column in range(track_len):
         for key in track_list[column]:
-            row = ALL_KEY_NOTE[key[0].capitalize()]
+            row = ALL_KEY_NOTE[key.key.capitalize()]
             key_matrix[row, column] += 1 / len(track_list[column]) if (norm) else 1
     return key_matrix
 
 
 def get_keys_from_sampled_midi(
     midi: mido.MidiFile, sample_duration: float = 10.0, alg_name: str = 'key.aarden', only_change: bool = False
-) -> List[Collection[(str, float)]]:
+) -> MidiKeys:
     ori_ratio = midi_duration(copy.deepcopy(midi))
     begin = 0.0
     key_list = []
     list_index = 0
     while begin + sample_duration <= ori_ratio:
-        cutted = midi_clip(copy.deepcopy(midi), begin, begin + sample_duration)
+        cutted = midi_clip(midi, begin, begin + sample_duration)
         cutted_muspy = mp.from_mido(cutted)
         try:
-            key, metrics = get_key_from_muspy_music(cutted_muspy, alg_name=alg_name)
+            key, _, _ = get_key_from_muspy_music(cutted_muspy, alg_name=alg_name)
             if not only_change or list_index == 0 or not key_list[-1][0] == key:
-                key_list.append((key, begin))
+                key_list.append(PartKey(key, begin))
         except:
             # logging.error("Couldn't compute key")
             pass
