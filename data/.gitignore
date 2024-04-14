@@ -7,3 +7,5 @@
 !processed/**
 !*.py
 !self_similarity_score.json
+!known_time_signatures
+!known_time_signatures/**
