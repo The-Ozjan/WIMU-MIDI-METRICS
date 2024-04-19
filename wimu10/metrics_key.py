@@ -1,5 +1,4 @@
 import music21 as m21
-from collections.abc import Collection
 import muspy as mp
 from typing import Dict, List, Tuple
 from muspy.utils import NOTE_MAP
@@ -54,12 +53,13 @@ ALL_KEY_NOTE: Dict[str, int] = {
 }
 
 ALGORITHM_DICT: Dict[str, str] = {
-    "AardenEssen""KrumhanslSchmuckler": "key.aarden",
-    "KrumhanslSchmuckler": "key.krumhansl",
-    "BellmanBudge": "key.bellman",
-    "SimpleWeights": "key.simple",
-    "TemperleyKostkaPayne": "key.temperley",
-} 
+    'AardenEssen': 'key.aarden',
+    'KrumhanslSchmuckler': 'key.krumhansl',
+    'BellmanBudge': 'key.bellman',
+    'SimpleWeights': 'key.simple',
+    'TemperleyKostkaPayne': 'key.temperley',
+}
+
 
 class PartKey:
     def __init__(self, key: Optional[str] = None, begin: float = 0) -> None:
@@ -184,39 +184,38 @@ def get_keys_from_sampled_midi(
         list_index += 1
     return key_list
 
+
 def diff_alg_keys(music: mp.Music) -> NDArray:
     output = np.zeros([len(ALL_KEY_NOTE), len(ALGORITHM_DICT)])
     col = 0
     for key_alg in ALGORITHM_DICT.keys():
         key, _, _ = get_key_from_muspy_music(music, alg_name=ALGORITHM_DICT[key_alg])
-        row = ALL_KEY_NOTE[key.key.capitalize()]
+        row = ALL_KEY_NOTE[key.capitalize()]
         output[row, col] = 1
         col += 1
     return output
 
 
-
-
-def diff_alg_keys_matrix(music_list: List[MidiKeys]) -> NDArray:
+def diff_alg_keys_music_list(music_list: List[mp.Music]) -> NDArray:
     music_list_len = len(music_list)
     output = np.zeros([len(ALL_KEY_NOTE), music_list_len])
     col = 0
     for music in music_list:
         for key_alg in ALGORITHM_DICT.keys():
             key, _, _ = get_key_from_muspy_music(music, alg_name=ALGORITHM_DICT[key_alg])
-            row = ALL_KEY_NOTE[key.key.capitalize()]
-            output[row, col] += 1.0/(ALGORITHM_DICT)
+            row = ALL_KEY_NOTE[key.capitalize()]
+            output[row, col] += 1.0 / float(len(ALGORITHM_DICT))
         col += 1
+    return output
 
 
-
-def key_for_whole_music_matrix(music_list: List[mp.Music], alg: str = "key.aarden")-> NDArray:
+def key_for_whole_music_matrix(music_list: List[mp.Music], alg: str = 'key.aarden') -> NDArray:
     music_list_len = len(music_list)
     output = np.zeros([len(ALL_KEY_NOTE), music_list_len])
     col = 0
     for music in music_list:
         key, _, _ = get_key_from_muspy_music(music, alg_name=alg)
-        row = ALL_KEY_NOTE[key.key.capitalize()]
+        row = ALL_KEY_NOTE[key.capitalize()]
         output[row, col] = 1
         col += 1
     return output

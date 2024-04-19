@@ -1,5 +1,4 @@
 import muspy as mp
-import numpy as np
 from wimu10 import metrics_key as mk
 import mido
 import music21 as m21
@@ -195,3 +194,27 @@ def test_keys_in_tracks_matrix():
     assert matrix[30, 2] == 1.0 / 3.0
     assert matrix[28, 2] == 1.0 / 3.0
     assert matrix[23, 2] == 1.0 / 3.0
+
+
+def test_diff_alg_keys():
+    music = mp.read_midi('tests/data/some_repeats.mid')
+    ret = mk.diff_alg_keys(music)
+    assert ret[19, 0] == 1.0
+    assert ret[0, 1] == 1.0
+    assert ret[0, 2] == 1.0
+    assert ret[0, 3] == 1.0
+    assert ret[19, 4] == 1.0
+
+
+def test_key_for_whole_music_matrix():
+    music = mp.read_midi('tests/data/some_repeats.mid')
+    ret = mk.key_for_whole_music_matrix([music, music])
+    assert ret[19, 0] == 1.0
+    assert ret[19, 1] == 1.0
+
+
+def test_diff_alg_keys_music_list():
+    music = mp.read_midi('tests/data/some_repeats.mid')
+    ret = mk.diff_alg_keys_music_list([music, music])
+    assert abs(ret[19, 0] - 2.0 / 5.0) <= 0.001
+    assert abs(ret[0, 0] - 3.0 / 5.0) <= 0.001
