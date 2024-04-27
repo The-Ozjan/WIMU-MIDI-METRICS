@@ -3,6 +3,7 @@ from wimu10 import metrics_key as mk
 import mido
 import music21 as m21
 import copy
+import numpy as np
 
 
 def test_keys_from_sample_midi():
@@ -75,15 +76,11 @@ def test_compute_key_signatures_hist():
         mk.PartKey('C minor', 70),
     ]
     list_keys, list_names = mk.compute_key_signatures_hist(key_list)
+    keys_names = ['C major', 'C minor', 'A major', 'D minor']
+    keys_amount = [ 2, 2, 3, 1]
     assert len(list_keys) == 4
-    assert list_keys[0] == 2
-    assert list_keys[1] == 2
-    assert list_keys[2] == 3
-    assert list_keys[3] == 1
-    assert list_names[0] == 'C major'
-    assert list_names[1] == 'C minor'
-    assert list_names[2] == 'A major'
-    assert list_names[3] == 'D minor'
+    assert list_keys == keys_amount
+    assert list_names == keys_names
 
 
 def test_similarity_key_score_same():
@@ -185,32 +182,38 @@ def test_keys_in_tracks_matrix():
     key_list2 = [mk.PartKey('C major', 0), mk.PartKey('C major', 10), mk.PartKey('G- major', 20)]
     key_list3 = [mk.PartKey('E- major', 0), mk.PartKey('B minor', 15), mk.PartKey('G- major', 90)]
     matrix = mk.keys_in_tracks_matrix([key_list, key_list2, key_list3])
-    assert matrix[0, 0] == 2.0 / 8.0
-    assert matrix[1, 0] == 2.0 / 8.0
-    assert matrix[18, 0] == 3.0 / 8.0
-    assert matrix[5, 0] == 1.0 / 8.0
-    assert matrix[0, 1] == 2.0 / 3.0
-    assert matrix[30, 1] == 1.0 / 3.0
-    assert matrix[30, 2] == 1.0 / 3.0
-    assert matrix[28, 2] == 1.0 / 3.0
-    assert matrix[23, 2] == 1.0 / 3.0
+    ans = np.zeros([len(mk.ALL_KEY_NOTE),3])
+    ans[0, 0] = 2.0 / 8.0
+    ans[1, 0] = 2.0 / 8.0
+    ans[18, 0] = 3.0 / 8.0
+    ans[5, 0] = 1.0 / 8.0
+    ans[0, 1] = 2.0 / 3.0
+    ans[30, 1] = 1.0 / 3.0
+    ans[30, 2] = 1.0 / 3.0
+    ans[28, 2] = 1.0 / 3.0
+    ans[23, 2] = 1.0 / 3.0
+    assert (matrix == ans).all()
 
 
 def test_diff_alg_keys():
     music = mp.read_midi('tests/data/some_repeats.mid')
     ret = mk.diff_alg_keys(music)
-    assert ret[19, 0] == 1.0
-    assert ret[0, 1] == 1.0
-    assert ret[0, 2] == 1.0
-    assert ret[0, 3] == 1.0
-    assert ret[19, 4] == 1.0
+    ans = np.zeros([len(mk.ALL_KEY_NOTE), len(mk.ALGORITHM_DICT)])
+    ans[19, 0] = 1.0
+    ans[0, 1] = 1.0
+    ans[0, 2] = 1.0
+    ans[0, 3] = 1.0
+    ans[19, 4] = 1.0
+    assert (ret == ans).all()
 
 
 def test_key_for_whole_music_matrix():
     music = mp.read_midi('tests/data/some_repeats.mid')
     ret = mk.key_for_whole_music_matrix([music, music])
-    assert ret[19, 0] == 1.0
-    assert ret[19, 1] == 1.0
+    ans = np.zeros([len(mk.ALL_KEY_NOTE), 2])
+    ans[19, 0] = 1.0
+    ans[19, 1] = 1.0
+    assert (ret == ans).all()
 
 
 def test_diff_alg_keys_music_list():

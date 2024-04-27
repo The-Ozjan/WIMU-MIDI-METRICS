@@ -62,7 +62,14 @@ ALGORITHM_DICT: Dict[str, str] = {
 
 
 class PartKey:
+    """
+    Class containing part of music key and beginning time 
+    """
     def __init__(self, key: Optional[str] = None, begin: float = 0) -> None:
+        """
+        key: containing nake of key
+        begin: time of key begin in music
+        """
         if not (begin >= 0 and (isinstance(begin, float) or isinstance(begin, int))):
             raise ValueError
         self.key = key
@@ -73,22 +80,36 @@ MidiKeys = List[PartKey]
 
 
 def get_key_from_music21_stream(stream: m21.stream.base.Score, alg_name: str = 'key.aarden') -> Tuple[str, int, int]:
-    # key.aarden
-    # key
-    # key.krumhansl
-    # key.bellman
-    # key.simple
-    # key.temperley
+    """
+    Function for key from music getting via music21 library
+    Returns tuple of key name, correlation coefficient and tonal certainty
+    
+    stream: music21 stream with symbolic music
+    alg_name: Name of algorithm from music21 library for key extraction
+    """
     analize = stream.analyze(alg_name)
     return str(analize), analize.correlationCoefficient, analize.tonalCertainty()
 
 
 def get_key_from_muspy_music(music: mp.Music, alg_name: str = 'key.aarden') -> Tuple[str, int, int]:
+    """
+    Function for key from music getting via music21 library
+    Returns tuple of key name, correlation coefficient and tonal certainty
+    
+    music: muspy Music with symbolic music
+    alg_name: Name of algorithm from music21 library for key extraction
+    """
     stream = mp.to_music21(music)
     return get_key_from_music21_stream(stream=stream, alg_name=alg_name)
 
 
 def compute_key_signatures_hist(key_list: MidiKeys) -> Tuple[List[int], List[str]]:
+    """
+    Function for keys in music histogram computing
+    Returns tuple of two lists. First list with amount of each key in track and second with key names
+
+    key_list: list with PartKeys of music track
+    """
     key_dic = {}
     for key in key_list:
         if key.key in key_dic.keys():
@@ -99,6 +120,13 @@ def compute_key_signatures_hist(key_list: MidiKeys) -> Tuple[List[int], List[str
 
 
 def similarity_key_score(key_list1: MidiKeys, key_list2: MidiKeys) -> float:
+    """
+    Function for similarity score computing. It tests if music have in the same time same key
+    Returns score in float
+
+    key_list1: list with PartKeys of first music
+    key_list2: list with PartKeys of second music
+    """
     score = 0
     index_key1 = 0
     index_key2 = 0
@@ -145,6 +173,12 @@ def similarity_key_score(key_list1: MidiKeys, key_list2: MidiKeys) -> float:
 
 
 def key_similarity_matrix(track_list: List[MidiKeys]) -> NDArray:
+    """
+    Function for key similarity matrix computing
+    Returns numpy array with similaritie scores rows and columns are music tracs
+
+    track_list: list of tracks containing list of track PartKeys
+    """
     track_len = len(track_list)
     similarity_matrix = np.zeros([track_len, track_len])
     for row in range(track_len):
@@ -154,6 +188,13 @@ def key_similarity_matrix(track_list: List[MidiKeys]) -> NDArray:
 
 
 def keys_in_tracks_matrix(track_list: List[MidiKeys], norm: bool = True) -> NDArray:
+    """
+    Function for computing matrix of keys amount in tracks
+    Returns matrix where rows are keys and columns are tracks
+
+    track_list: list of tracks containing list of track PartKeys
+    norm: bool value if matrix should contain normalised values
+    """
     track_len = len(track_list)
     key_matrix = np.zeros([len(ALL_KEY_NOTE), track_len])
     for column in range(track_len):
@@ -166,6 +207,15 @@ def keys_in_tracks_matrix(track_list: List[MidiKeys], norm: bool = True) -> NDAr
 def get_keys_from_sampled_midi(
     midi: mido.MidiFile, sample_duration: float = 10.0, alg_name: str = 'key.aarden', only_change: bool = False
 ) -> MidiKeys:
+    """
+    Function for computing PartKeys  from track
+    Returns List of PartKeys
+
+    midi: mido MidiFile with midi track
+    sample_duration: duration of sample from track which is used for key computing
+    alg_name: Name of algorithm from music21 library for key extraction
+    only_change: left only new keys in list
+    """
     ori_ratio = midi_duration(copy.deepcopy(midi))
     begin = 0.0
     key_list = []
@@ -186,6 +236,12 @@ def get_keys_from_sampled_midi(
 
 
 def diff_alg_keys(music: mp.Music) -> NDArray:
+    """
+    Function for getting single keys for track from all algorithms
+    Returns numpy array where rows are keys and columns are algorithms
+
+    music: muspy Music class with symbolic music
+    """
     output = np.zeros([len(ALL_KEY_NOTE), len(ALGORITHM_DICT)])
     col = 0
     for key_alg in ALGORITHM_DICT.keys():
@@ -197,6 +253,12 @@ def diff_alg_keys(music: mp.Music) -> NDArray:
 
 
 def diff_alg_keys_music_list(music_list: List[mp.Music]) -> NDArray:
+    """
+    Function for getting normalised value of keys amount from different keys algorithm for whole track
+    Returns numpy array with normalised value of keys amount from different keys algorithm for whole track
+
+    music_list: list with tracks in muspy Music classes
+    """
     music_list_len = len(music_list)
     output = np.zeros([len(ALL_KEY_NOTE), music_list_len])
     col = 0
@@ -210,6 +272,13 @@ def diff_alg_keys_music_list(music_list: List[mp.Music]) -> NDArray:
 
 
 def key_for_whole_music_matrix(music_list: List[mp.Music], alg: str = 'key.aarden') -> NDArray:
+    """
+    Function for creating matrix with key from whole track computed by selected algorithm
+    Returns numpy array where rows are possible keys, columns are tracks
+
+    music_list: list with tracks in muspy Music classes
+    alg_name: Name of algorithm from music21 library for key extraction
+    """
     music_list_len = len(music_list)
     output = np.zeros([len(ALL_KEY_NOTE), music_list_len])
     col = 0
