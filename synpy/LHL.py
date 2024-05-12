@@ -55,7 +55,7 @@ def get_syncopation(bar, parameters = None):
 	else:
 		# set defaults
 		Lmax = 10
-		weightSequence = range(0,-Lmax-1,-1)
+		weightSequence = list(range(0,-Lmax-1,-1))
 		# if parameters are specified by users, check their validities and update parameters if valid
 		if parameters!= None:
 			if 'Lmax' in parameters:

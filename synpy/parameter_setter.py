@@ -59,16 +59,15 @@ def is_time_signature_valid(timeSignature, subdivisionSequence, beatLevel):
 
 def write_time_signature():
 	import pickle
-	timeSigFile = open(getScriptPath()+'/TimeSignature.pkl', 'wb')
-	pickle.dump(timeSignatureBase, timeSigFile)
-	timeSigFile.close()
+	with open(getScriptPath()+'/TimeSignature.pkl', 'wb') as timeSigFile:
+		pickle.dump(timeSignatureBase, timeSigFile)
+	return
 
 def read_time_signature():
 	import pickle
-	timeSigFile = open(getScriptPath()+'/TimeSignature.pkl','rb')
-	data = pickle.load(timeSigFile)
+	with open(getScriptPath()+'/TimeSignature.pkl','rb') as timeSigFile:
+		data = pickle.load(timeSigFile)
 	return data
-	timeSigFile.close()
 
 def print_time_signature_base():
 	data = read_time_signature()

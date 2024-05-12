@@ -37,7 +37,7 @@ def get_syncopation(bar, parameters = None):
 
 		# set the defaults
 		Lmax  = 5
-		weightSequence = range(Lmax+1,0,-1) # i.e. [6,5,4,3,2,1]
+		weightSequence = list(range(Lmax+1,0,-1)) # i.e. [6,5,4,3,2,1]
 
 		if parameters!= None:
 			if 'Lmax' in parameters:

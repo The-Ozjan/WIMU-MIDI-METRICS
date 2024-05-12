@@ -164,7 +164,7 @@ def get_H(weightSequence,subdivisionSequence, level):
 
 
 def calculate_bar_ticks(numerator, denominator, ticksPerQuarter):
-	return (numerator * ticksPerQuarter *4) / denominator
+	return (numerator * ticksPerQuarter *4) // denominator
 
 
 def get_rhythm_category(velocitySequence, subdivisionSequence):
