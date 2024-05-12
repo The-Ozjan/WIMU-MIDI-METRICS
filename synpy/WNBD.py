@@ -20,9 +20,8 @@ def get_syncopation(bar, parameters=None):
     subdivisionSequence = bar.get_subdivision_sequence()
     strongBeatLevel = bar.get_beat_level()
 
-    nextbarNoteSequence = None
     if bar.get_next_bar() is not None:
-        nextbarNoteSequence = bar.get_next_bar().get_note_sequence()
+        bar.get_next_bar().get_note_sequence()
 
     # calculate each strong beat ticks
     numberOfBeats = cumu_multiply(subdivisionSequence[: strongBeatLevel + 1])

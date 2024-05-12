@@ -10,7 +10,6 @@ http://www.argonet.co.uk/users/lenny/midi/mfile.html
 """
 import sys
 import string
-import types
 debugflag = 0
 
 
@@ -90,7 +89,7 @@ class Enumeration:
         for k in other.lookup.keys():
             lst.append((k, other.lookup[k]))
         return Enumeration(lst)
-    def hasattr(self, attr):
+    def _hasattr(self, attr):
         return attr in self.lookup
     def has_value(self, attr):
         return attr in self.reverseLookup
@@ -154,7 +153,7 @@ class MidiEvent:
               self.track.index,
               repr(self.channel)))
         for attrib in ["pitch", "data", "velocity"]:
-            if getattr(self, attrib) != None:
+            if getattr(self, attrib) is not None:
                 r = r + ", " + attrib + "=" + repr(getattr(self, attrib))
         return r + ">"
     def read(self, time, s_str):
@@ -201,16 +200,16 @@ class MidiEvent:
             if not metaEvents.has_value(z):
                 print("Unknown meta event: FF %02X" % z)
                 sys.stdout.flush()
-                raise "Unknown midi event type"
+                raise Exception("Unknown midi event type")
             self.type = metaEvents.whatis(z)
             length, s_str = getVariableLengthNumber(s_str[2:])
             self.data = s_str[:length]
             return s_str[length:]
-        raise "Unknown midi event type"
+        raise Exception("Unknown midi event type")
     def write(self):
         sysex_event_dict = {"F0_SYSEX_EVENT": 0xF0,
                             "F7_SYSEX_EVENT": 0xF7}
-        if channelVoiceMessages.hasattr(self.type):
+        if channelVoiceMessages._hasattr(self.type):
             x = chr((self.channel - 1) +
                     getattr(channelVoiceMessages, self.type))
             if (self.type != "PROGRAM_CHANGE" and
@@ -219,20 +218,20 @@ class MidiEvent:
             else:
                 data = chr(self.data)
             return x + data
-        elif channelModeMessages.hasattr(self.type):
+        elif channelModeMessages._hasattr(self.type):
             x = getattr(channelModeMessages, self.type)
             x = (chr(0xB0 + (self.channel - 1)) +
                  chr(x) +
                  chr(self.data))
             return x
         elif sysex_event_dict.has_key(self.type):
-            str = chr(sysex_event_dict[self.type])
-            str = str + putVariableLengthNumber(len(self.data))
-            return str + self.data
-        elif metaEvents.hasattr(self.type):
-            str = chr(0xFF) + chr(getattr(metaEvents, self.type))
-            str = str + putVariableLengthNumber(len(self.data))
-            return str + self.data
+            s_str = chr(sysex_event_dict[self.type])
+            s_str = s_str + putVariableLengthNumber(len(self.data))
+            return s_str + self.data
+        elif metaEvents._hasattr(self.type):
+            s_str = chr(0xFF) + chr(getattr(metaEvents, self.type))
+            s_str = s_str + putVariableLengthNumber(len(self.data))
+            return s_str + self.data
         else:
             raise "unknown midi event type: " + self.type
 
@@ -278,13 +277,13 @@ class MidiChannel:
 
 
 class DeltaTime(MidiEvent):
-    type = "DeltaTime"
+    s_type = "DeltaTime"
     def read(self, oldstr):
         self.time, newstr = getVariableLengthNumber(oldstr)
         return self.time, newstr
     def write(self):
-        str = putVariableLengthNumber(self.time)
-        return str
+        s_str = putVariableLengthNumber(self.time)
+        return s_str
 
 
 class MidiTrack:
@@ -295,13 +294,13 @@ class MidiTrack:
         self.length = 0
         for i in range(16):
             self.channels.append(MidiChannel(self, i+1))
-    def read(self, str):
+    def read(self, s_str):
         time = 0
-        assert str[:4] == b'MTrk'
-        length, str = getNumber(str[4:], 4)
+        assert s_str[:4] == b'MTrk'
+        length, s_str = getNumber(s_str[4:], 4)
         self.length = length
-        mystr = str[:length]
-        remainder = str[length:]
+        mystr = s_str[:length]
+        reminder = s_str[length:]
         while mystr:
             delta_t = DeltaTime(self)
             dt, mystr = delta_t.read(mystr)
@@ -310,14 +309,13 @@ class MidiTrack:
             e = MidiEvent(self)
             mystr = e.read(time, mystr)
             self.events.append(e)
-        return remainder
+        return reminder
     def write(self):
-        time = self.events[0].time
         # build str using MidiEvents
-        str = ""
+        s_str = ""
         for e in self.events:
-            str = str + e.write()
-        return "MTrk" + putNumber(len(str), 4) + str
+            s_str = s_str + e.write()
+        return "MTrk" + putNumber(len(s_str), 4) + s_str
     def __repr__(self):
         r = "<MidiTrack %d -- %d events\n" % (self.index, len(self.events))
         for e in self.events:
@@ -333,8 +331,8 @@ class MidiFile:
         self.tracks = [ ]
         self.ticksPerQuarterNote = None
         self.ticksPerSecond = None
-    def open(self, filename, attrib="rb"):
-        if filename == None:
+    def _open(self, filename, attrib="rb"):
+        if filename is None:
             if attrib in ["r", "rb"]:
                 self.file = sys.stdin
             else:
@@ -354,9 +352,9 @@ class MidiFile:
         assert s_str[:4] == b'MThd'
         length, s_str = getNumber(s_str[4:], 4)
         assert length == 6
-        format, s_str = getNumber(s_str, 2)
-        self.format = format
-        assert format == 0 or format == 1   # dunno how to handle 2
+        s_format, s_str = getNumber(s_str, 2)
+        self.format = s_format
+        assert s_format == 0 or s_format == 1   # dunno how to handle 2
         numTracks, s_str = getNumber(s_str, 2)
         division, s_str = getNumber(s_str, 2)
         if division & 0x8000:
@@ -364,7 +362,8 @@ class MidiFile:
             ticksPerFrame = division & 0xFF
             assert ticksPerFrame == 24 or ticksPerFrame == 25 or \
                    ticksPerFrame == 29 or ticksPerFrame == 30
-            if ticksPerFrame == 29: ticksPerFrame = 30  # drop frame
+            if ticksPerFrame == 29:
+                ticksPerFrame = 30  # drop frame
             self.ticksPerSecond = ticksPerFrame * framesPerSecond
         else:
             self.ticksPerQuarterNote = division & 0x7FFF
@@ -403,13 +402,13 @@ def main(argv):
         elif option == '-d':
             debugflag = 1
     m = MidiFile()
-    m.open(infile)
+    m._open(infile)
     m.read()
     m.close()
     if printflag:
         print(m)
     else:
-        m.open(outfile, "wb")
+        m._open(outfile, "wb")
         m.write()
         m.close()
 
