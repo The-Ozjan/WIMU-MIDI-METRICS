@@ -161,7 +161,7 @@ class MidiEvent:
         self.time = time
         # do we need to use running status?
         if not (s_str[0] & 0x80):
-            s_str = runningStatus + s_str
+            s_str = runningStatus.to_bytes(1) + s_str
         runningStatus = x = s_str[0]
         y = x & 0xF0
         z = s_str[1]
@@ -277,7 +277,7 @@ class MidiChannel:
 
 
 class DeltaTime(MidiEvent):
-    s_type = "DeltaTime"
+    type = "DeltaTime"
     def read(self, oldstr):
         self.time, newstr = getVariableLengthNumber(oldstr)
         return self.time, newstr

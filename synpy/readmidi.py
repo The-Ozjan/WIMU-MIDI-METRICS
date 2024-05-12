@@ -346,8 +346,8 @@ def midi_event_to_time_signature(midiTimeSignatureEvent):
         print("Error in midi_event_to_time_signature(),  event must be a midi time signature type")
         return None
     else:
-        num = ord(midiTimeSignatureEvent.data[0])
-        denom = 2**ord(midiTimeSignatureEvent.data[1])
+        num = midiTimeSignatureEvent.data[0]
+        denom = 2**midiTimeSignatureEvent.data[1]
         return TimeSignature("%d/%d" % (num, denom))
 
 
@@ -361,7 +361,7 @@ def midi_event_to_qpm_tempo(midiTempoEvent):
     else:
         # tempo is stored as microseconds per quarter note
         # in three bytes which we can extract as three ints:
-        values = map(ord, midiTempoEvent.data)
+        values = midiTempoEvent.data
         # first byte multiplied by 2^16, second 2^8 and third is normal units
         # giving microseconds per quarter
         microsecondsPerQuarter = values[0]*2**16 + values[1]*2**8 + values[2]

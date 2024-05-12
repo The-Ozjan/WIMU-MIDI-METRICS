@@ -10,7 +10,7 @@ from music_objects import Bar, BarList
 def sync_perbar_permodel (model, bar, parameters=None):
     return model.get_syncopation(bar, parameters)
 
-def calculate_syncopation(model, source, parameters=None, outfile=None, barRange=None):
+def calculate_syncopation(model, source, parameters=None, outfile=None, barRange=None, debugPrint=False):
     total = 0.0
     barResults = []
     numberOfNotes = 0
@@ -57,7 +57,8 @@ def calculate_syncopation(model, source, parameters=None, outfile=None, barRange
 
 
         for bar in barlist[barstart:barend]:
-            print('processing bar %d' % (barlist.index(bar)+1))
+            if debugPrint:
+                print('processing bar %d' % (barlist.index(bar)+1))
 
             barSyncopation = sync_perbar_permodel(model, bar, parameters)
 
