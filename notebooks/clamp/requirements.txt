@@ -7,3 +7,4 @@ requests==2.27.1
 tqdm==4.63.1
 unidecode==1.3.4
 pandas==2.1.4
+matplotlib==3.8.4
