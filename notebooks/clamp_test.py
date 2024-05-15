@@ -42,6 +42,13 @@ def main():
     cw.change_clamp_txt_keys(["It is funny.", "It is sad.", "It is about love", "It is composed for movie", "Clint Eastwood played in fil with this music."])
     save_plot_clamp_models_txt_query("Love song.")
     save_plot_clamp_models_music_query("notebooks/clamp/model/inference/music_keys/Gran Torino.mxl")
+    save_plot_clamp_models_txt_query("This song genre is Jazz")
+    save_plot_clamp_models_txt_query("This song genre is Dance")
+    save_plot_clamp_models_txt_query("This song genre is Rock")
+    save_plot_clamp_models_txt_query("This song genre is Country")
+    save_plot_clamp_models_txt_query("This song is Happy")
+    save_plot_clamp_models_txt_query("This song is from movie")
+
 
 
 if __name__ == "__main__":
