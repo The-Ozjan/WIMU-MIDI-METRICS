@@ -82,6 +82,7 @@ def calculate_syncopation(model, source, parameters=None, outfile=None, barRange
         import WNBD
         if model is WNBD:
             total =  total / numberOfNotes
+            barResults = [i / numberOfNotes for i in barResults]
 
         if len(barResults)>barsDiscarded:
             average = total / (len(barResults)-barsDiscarded)

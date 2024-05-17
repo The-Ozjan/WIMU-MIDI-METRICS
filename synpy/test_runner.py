@@ -1,6 +1,6 @@
 import syncopation as s
 import LHL, PRS, SG, TMC, TOB, WNBD  # noqa: E401
-from metrics_syncopation import syncopation_plot
+from metrics_syncopation import syncopation_by_bar_plot
 
 models = [LHL, PRS, SG, TMC, TOB, WNBD]
 models = [TOB, WNBD]
@@ -15,7 +15,7 @@ for i in range(len(models)):
     # out = s.calculate_syncopation(models[i], 'test2.mid')
     # outs2.append(out['syncopation_by_bar'])
 
-syncopation_plot(outs1[1])
+syncopation_by_bar_plot(outs1[1])
 print(len(outs1[0]))
 for i in range(len(outs1)):
     print("model", i, outs1[i])#, [x - y for x, y in zip(outs2[i], outs1[i])])
