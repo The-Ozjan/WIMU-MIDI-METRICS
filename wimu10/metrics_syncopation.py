@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
-from syncopation import calculate_syncopation
-from readmidi import get_bars_from_midi, read_midi_file
-import LHL, PRS, SG, TMC, TOB, WNBD  # noqa: E401
-import mido
+from synpy.syncopation import calculate_syncopation
+from synpy.readmidi import get_bars_from_midi, read_midi_file
+from synpy import LHL, PRS, SG, TMC, TOB, WNBD  # noqa: E401
 
 SYNCOPATION_DATA = dict[str]
 
