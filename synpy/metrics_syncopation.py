@@ -1,11 +1,38 @@
 import matplotlib.pyplot as plt
 from syncopation import calculate_syncopation
-from readmidi import MidiFile, get_bars_from_midi, read_midi_file
-from copy import deepcopy
+from readmidi import get_bars_from_midi, read_midi_file
 import LHL, PRS, SG, TMC, TOB, WNBD  # noqa: E401
-import numpy as np
+import mido
 
 SYNCOPATION_DATA = dict[str]
+
+SYNCOPATION_MODELS = {
+    'LHL': LHL,
+    'PRS': PRS,
+    'SG': SG,
+    'TMC': TMC,
+    'TOB': TOB,
+    'WNBD': WNBD
+}
+
+
+def calc_syncopation(model: str, file_path: str, parameters=None, outfile: str=None, debugPrint: bool=False) -> SYNCOPATION_DATA:
+
+    if model not in SYNCOPATION_MODELS:
+        raise(Exception('Chosen model do not exist!'))
+
+    try:
+        midi_music = read_midi_file(file_path)
+    except (Exception):
+        raise(Exception('Midi file is not valid!')) from None
+
+    if len(midi_music.tracks) > 1 and model != 'TOB' and model != 'WNBD':
+        raise(Exception('Chosen model do not accept multi-track files! Choose TOB or WNBD instead.'))
+
+    barlist = get_bars_from_midi(midi_music)
+    output = calculate_syncopation(SYNCOPATION_MODELS[model], source=barlist, parameters=parameters, outfile=outfile, debugPrint=debugPrint)
+
+    return output
 
 def syncopation_by_bar_plot(data: SYNCOPATION_DATA) -> None:
     y = data['syncopation_by_bar']
@@ -37,21 +64,7 @@ def syncopation_metrics_chart(data: SYNCOPATION_DATA) -> None:
     plt.show()
     return
 
-def calc_syncopation(model, file_path: str, parameters=None, outfile=None, barRange=None, debugPrint=False) -> SYNCOPATION_DATA:
-
-    # output = []
-    midi_music = read_midi_file(file_path)
-    # tracks = deepcopy(midi_music.tracks)
-    # for track in tracks:
-    #     midi_music.tracks = [track]
-    #     midi_music.format = 0
-    barlist = get_bars_from_midi(midi_music)
-    # output.append(calculate_syncopation(model, barlist, parameters, outfile, barRange, debugPrint))
-    output = calculate_syncopation(model, barlist, parameters, outfile, barRange, debugPrint)
-
-    return output
-
 if __name__ == '__main__':
-    out = calc_syncopation(TOB,'test_files/B_flat_major.mid')
+    out = calc_syncopation('TOB','test/B_flat_major.mid')
     syncopation_metrics_chart(out)
     syncopation_by_bar_plot(out)
