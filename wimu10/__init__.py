@@ -9,5 +9,6 @@ __all__ = [  # noqa: F405
     'metrics',
     'metrics_chords',
     'metrics_dynamics',
-    "metrics_time_signature"
+    'metrics_time_signature',
+    'metrics_key',
 ]

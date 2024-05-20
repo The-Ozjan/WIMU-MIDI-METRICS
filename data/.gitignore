@@ -9,3 +9,7 @@
 !self_similarity_score.json
 !known_time_signatures
 !known_time_signatures/**
+!midi_with_keys
+!midi_with_keys/**
+!clamp_test
+!clamp_test/**
