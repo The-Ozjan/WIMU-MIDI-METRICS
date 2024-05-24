@@ -1,20 +1,26 @@
 from wimu10 import metrics_time_signature as ts
-import music21 as m21
 
 
 def test_result_len():
-    tsList1 = ts.find_time_signature('tests/data/4by4.mid')
-    tsList2 = ts.find_time_signature('tests/data/2by4-6by8.mid')
-    tsList3 = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    offsets, ratios = ts.find_time_signature('tests/data/4by4.mid')
+    tsList1 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/2by4-6by8.mid')
+    tsList2 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    tsList3 = list(zip(offsets, ratios))
+
     assert len(tsList1) == 1
     assert len(tsList2) == 8
     assert len(tsList3) == 8
 
 
 def test_result_element_len():
-    tsList1 = ts.find_time_signature('tests/data/4by4.mid')
-    tsList2 = ts.find_time_signature('tests/data/2by4-6by8.mid')
-    tsList3 = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    offsets, ratios = ts.find_time_signature('tests/data/4by4.mid')
+    tsList1 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/2by4-6by8.mid')
+    tsList2 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    tsList3 = list(zip(offsets, ratios))
     tsLists = [tsList1, tsList2, tsList3]
 
     for result in tsLists:
@@ -23,9 +29,12 @@ def test_result_element_len():
 
 
 def test_variable_types():
-    tsList1 = ts.find_time_signature('tests/data/4by4.mid')
-    tsList2 = ts.find_time_signature('tests/data/2by4-6by8.mid')
-    tsList3 = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    offsets, ratios = ts.find_time_signature('tests/data/4by4.mid')
+    tsList1 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/2by4-6by8.mid')
+    tsList2 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    tsList3 = list(zip(offsets, ratios))
     tsLists = [tsList1, tsList2, tsList3]
 
     for result in tsLists:
@@ -38,9 +47,13 @@ def test_variable_types():
 
 
 def test_get_time_signatures():
-    tsList1 = ts.find_time_signature('tests/data/4by4.mid')
-    tsList2 = ts.find_time_signature('tests/data/2by4-6by8.mid')
-    tsList3 = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    offsets, ratios = ts.find_time_signature('tests/data/4by4.mid')
+    tsList1 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/2by4-6by8.mid')
+    tsList2 = list(zip(offsets, ratios))
+    offsets, ratios = ts.find_time_signature('tests/data/3by4-2by4.mid')
+    tsList3 = list(zip(offsets, ratios))
+
     assert (0.0, '4/4') in tsList1
     assert (0.0, '2/4') in tsList2
     assert (224.0, '6/8') in tsList2
