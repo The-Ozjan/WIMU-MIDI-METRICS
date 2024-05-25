@@ -28,7 +28,7 @@ Następnie czas wystąpienia obiektu w strumieniu (offset) oraz wartość są za
 ## Wyniki
 
 Poniższe wykresy są przykładowymi wizualizacjami danych zawartych w plikach MIDI, dotyczących metrum i tempa muzyki.
-Wykresy zmian wartości w czasie pomagają w ocenie złożoności analizowanego utworu oraz stanowią prosty sposób na dostęp do kluczowych informacji o kompozycji.
+**Wykresy zmian wartości w czasie pomagają w ocenie złożoności analizowanego utworu oraz stanowią prosty sposób na dostęp do kluczowych informacji o kompozycji.**
 
 :::{figure-md}
 
