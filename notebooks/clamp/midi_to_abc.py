@@ -74,7 +74,7 @@ def midi_to_abc(src: Path, dst: Path):
     Conversion of one MIDI file to one ABC file.
     """
     dst.touch(exist_ok=False)
-    subprocess.Popen(f'notebooks/clamp/midi2abc.exe -s -o "{dst}" "{src}"', stdout=subprocess.PIPE)
+    subprocess.Popen(['notebooks/clamp/midi2abc.exe', '-s', '-o', dst, src], stdout=subprocess.PIPE)
 
 
 def main(input_dir: Path, output_dir: Path, max_workers: Optional[int] = None):
