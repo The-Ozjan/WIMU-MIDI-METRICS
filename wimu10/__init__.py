@@ -11,4 +11,5 @@ __all__ = [  # noqa: F405
     'metrics_dynamics',
     'metrics_time_signature',
     'metrics_key',
+    'metrics_syncopation',
 ]
