@@ -64,6 +64,6 @@ def syncopation_metrics_chart(data: SYNCOPATION_DATA) -> None:
     return
 
 if __name__ == '__main__':
-    out = calc_syncopation('TOB','test/B_flat_major.mid')
+    out = calc_syncopation('TOB','data/midi_with_keys/B_flat_major.mid')
     syncopation_metrics_chart(out)
     syncopation_by_bar_plot(out)
