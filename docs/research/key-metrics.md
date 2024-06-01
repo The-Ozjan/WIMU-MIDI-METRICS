@@ -1,9 +1,11 @@
 # Miary tonacji
 
 ## Zbiory danych
-
+Podczas tworzenia metryki testującej tonację utworów przygotowany został zbiór testowy. Zawiera on pięć utworów w formacie `midi` ze znanymi tonacjami takimi jak `B major, C major, C minor, D major, F major`. Zbiór ten umieszczony został w folderze o nazwie midi_with_keys. Dzieła pozyskane zostały ze strony [Kunstderfuge](https://www.kunstderfuge.com/beethoven/variae.htm), zawierającej darmową muzykę klasyczną w formacie midi. Badania przeprowadzone zostały również na zbiorze [MAESTRO][maestro].
 ## Opis metryk
-
+Podczas tworzenia miar głównie wykorzystana została biblioteka `music21`. Utworzone zostały funkcje umożliwiające zwracanie tonacji dla całego utworu bądź też listę tonacji dla poszczególnych fragmentów danego utworu. Każda taka funkcja umożliwia wykożystanie różnych wag dla algorytmu opracowanego przez Krumhansla oraz Schmucklera[^krumh]. Stwożone zostały również funkcje które porównują rezultaty uzyskane pomiędzy algorytmami. Istnieje również możliwość podawania do pewnych funkcji zbiorów danych zamiast pojedyńczych utworów. Ponadto stworzona została funkcja porównująca tonacje dwuch utworów i określająca jak podobne są do siebie.
+### Algorytm  opracowany przez Krumhansla oraz Schmucklera
+Algorytm wyszukiwania kluczy Krumhansl-Schmuckler opiera się na "profilach kluczy". Profil klucza to wektor składający się z 12 wartości, które reprezentują stabilność 12 klas wysokości dźwięku w odniesieniu do danego klucza. Profile kluczy zostały opracowane na podstawie danych z eksperymentów przeprowadzonych przez Krumhansla i Kesslera. W tych eksperymentach badani oceniali, jak dobrze każda klasa wysokości dźwięku "pasuje" do wcześniej ustalonego kontekstu tonacji, takiego jak kadencja lub skala (Krumhansl i Kessler, 1982). Wysoka wartość w profilu klucza wskazuje, że odpowiednia klasa wysokości dźwięku została uznana za dobrze dopasowaną do danej tonacji. Każda z 24 tonacji durowych i molowych ma swój unikalny profil tonacji.
 ### Wykresy tonacji
 
 
@@ -12,5 +14,10 @@
 ## Wnioski
 
 ## Przyszłe rozszerzenia
-
+W przyszłości będzie można spróbować przyśpieszyć działanie funkcji, która odpowiada za dzielenie utworu na części i sprawdzania ich tonacji. Na chwilę obecną wycinanie fragmentu utworu wykonaywane jest za pomocą biblioteki midi_clip. Również będzie można dodać inne rozwiązania badające tonacje.  
 ## Bibliografia
+
+[maestro]: https://magenta.tensorflow.org/datasets/maestro
+
+[^krumh]:  ["Carol L. Krumhansl. Cognitive Foundations of Musical Pitch. New York: Oxford University Press,
+1990."]
