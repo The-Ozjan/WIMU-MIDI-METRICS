@@ -79,7 +79,7 @@ def calculate_syncopation(model, source, parameters=None, outfile=None, barRange
                 discardedlist.append(barlist.index(bar))
                 print('Model could not measure bar %d, returning None.' % (barlist.index(bar)+1))
 
-        import WNBD
+        from . import WNBD
         if model is WNBD:
             total =  total / numberOfNotes
             barResults = [i / numberOfNotes for i in barResults]
