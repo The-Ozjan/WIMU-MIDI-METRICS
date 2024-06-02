@@ -44,7 +44,6 @@ Wykres dla wygenerowanych danych za pomocą TF RNN
 
 
 ![imgtf](../../images/tf_rnn_key.png)
-## Wnioski
 
 ## Przyszłe rozszerzenia
 W przyszłości będzie można spróbować przyspieszyć działanie funkcji, która odpowiada za dzielenie utworu na części i sprawdzania ich tonacji. Na chwilę obecną wycinanie fragmentu utworu wykonywane jest za pomocą biblioteki midi_clip. Również będzie można dodać inne rozwiązania badające tonacje.  
