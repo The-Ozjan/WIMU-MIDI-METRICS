@@ -1,6 +1,11 @@
 import subprocess
 from typing import Dict, List, Tuple
 import shutil
+import notebooks.clamp.model.clamp_ori as clamp
+from torch import Tensor
+from unidecode import unidecode
+from transformers import AutoTokenizer
+from notebooks.clamp.model.utils import *
 
 
 def clamp_output(
@@ -143,3 +148,21 @@ def get_output_music_to_music_change_music_query(
     """
     change_clamp_music_query(music_query_path, path)
     return clamp_output('music', 'music', top_n=top_n, model=model, cwd=cwd)
+
+def compute_str_query_embeding(query:str) -> Tensor:
+    if torch.cuda.is_available():    
+        device = torch.device("cuda")
+        print('There are %d GPU(s) available.' % torch.cuda.device_count())
+        print('We will use the GPU:', torch.cuda.get_device_name(0))
+
+    else:
+        device = torch.device("cpu")
+    TEXT_MODEL_NAME = 'distilroberta-base'
+    # initialize patchilizer, tokenizer, and softmax
+    patchilizer = MusicPatchilizer()
+    tokenizer = AutoTokenizer.from_pretrained(TEXT_MODEL_NAME)
+    softmax = torch.nn.Softmax(dim=1)
+    query_decode = unidecode(query)
+    query_ids = clamp.encoding_data([query_decode], "text")
+    query_feature = clamp.get_features(query_ids, "text")
+    return query_feature
