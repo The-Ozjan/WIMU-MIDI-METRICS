@@ -6,4 +6,35 @@ Podczas badania CLaMP sprawdzane było jak radzi sobie z zadaniami wyszukiwania 
 ## Prykładowe uzyskane wykresy
 
 ## Rozwinięcie badań nad embeddingami 
-Jako rozwinięcie wcześniejszych badań nad embedingami CLaMPa, które sprawdzały wariancję embedingów, wyznaczona została średnia odległość kosinusowa dla danego twórcy i zapytania tekstowego.
+Jako rozwinięcie wcześniejszych badań nad embedingami CLaMPa, które sprawdzały wariancję embedingów, wyznaczona została średnia odległość kosinusowa dla danego twórcy i zapytania tekstowego. Przykładowa tabela dla zapytania "It is composed by Johannes Brahms"
+
+|                  Group or author                   | Songs | Avg similar  |
+|----------------------------------------------------|-------|--------------|
+|                      Everyone                      |  1276 |  0.232241422 |
+|                  Frédéric Chopin                   |   201 |  0.228763278 |
+|                   Franz Schubert                   |   186 |  0.250301540 |
+|                Ludwig van Beethoven                |   146 |  0.242658949 |
+|               Johann Sebastian Bach                |   145 |  0.227998613 |
+|                    Franz Liszt                     |   131 |  0.217323584 |
+|                Sergei Rachmaninoff                 |    59 |  0.230307166 |
+|                  Robert Schumann                   |    49 |  0.245009140 |
+|                   Claude Debussy                   |    45 |  0.179885443 |
+|                    Joseph Haydn                    |    40 |  0.238572886 |
+|              Wolfgang Amadeus Mozart               |    38 |  0.237674739 |
+|                 Alexander Scriabin                 |    35 |  0.229150356 |
+|                 Domenico Scarlatti                 |    31 |  0.215366890 |
+|                 Felix Mendelssohn                  |    28 |  0.245764141 |
+|                  Johannes Brahms                   |    26 |  0.240885498 |
+|            Franz Schubert / Franz Liszt            |    10 |  0.231947316 |
+|                   Isaac Albéniz                    |     7 |  0.219790978 |
+|     Pyotr Ilyich Tchaikovsky / Mikhail Pletnev     |     6 |  0.236226079 |
+|              Pyotr Ilyich Tchaikovsky              |     6 |  0.241343606 |
+|                   Muzio Clementi                   |     6 |  0.255861574 |
+|                 Modest Mussorgsky                  |     6 |  0.202694252 |
+|                  Nikolai Medtner                   |     5 |  0.240970583 |
+|      Johann Sebastian Bach / Ferruccio Busoni      |     5 |  0.228982184 |
+|               George Frideric Handel               |     5 |  0.232228038 |
+|                    César Franck                    |     5 |  0.237573315 |
+
+
+![img](../../images/query_author_name_test.png)
