@@ -14,3 +14,8 @@
 .. automodule:: wimu10.metrics_dynamics
    :members:
 ```
+
+```{eval-rst}
+.. automodule:: wimu10.metrics_syncopation
+   :members:
+```

@@ -1,5 +1,7 @@
 # Miary synkopy
 
+## Biblioteka SynPy
+
 W ramach projektu biblioteka [SynPy](https://code.soundsoftware.ac.uk/projects/syncopation-dataset/repository) została przeportowana z Pythona wersji 2 do Pythona wersji 3.
 Biblioteka implementuje kilka modeli rozpoznawania synkopy w utworach zapisanych w formacie symbolicznym (MIDI).
 Stanowi platformę do analizy synkopy w utworach i ułatwia wyrażenie jej w formacie liczbowym, a także umożliwia porównywanie modeli ze sobą.

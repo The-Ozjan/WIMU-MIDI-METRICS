@@ -22,6 +22,15 @@ Samopodobieństwo<research/self_similarity.md>
 Tokenizacja<research/tokenization.md>
 ```
 
+```{toctree}
+:hidden:
+:caption: Nowe eksperymenty
+Miary oparte o tonacje<research/key-metrics.md>
+Miary oparte o tempo<research/time-signature-metrics.md>
+Miary oparte o synkopę<research/syncope-metrics.md>
+Nowe testy CLaMP<research/clamp-tests.md>
+```
+
 ```{include} ../README.md
 :relative-docs: docs/
 :relative-images:

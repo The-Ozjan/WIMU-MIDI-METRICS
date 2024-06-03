@@ -1,7 +1,5 @@
 # Metrum i tempo
 
-W ramach projektu została stworzona funkcjonalność ułatwiająca wczytywanie zapisu metrum i tempa z plików MIDI.
-
 ## Zbiory danych
 
 Przykładowe pliki z rozszerzeniem .mid można pobrać ze strony internetowej https://kunstderfuge.com/
