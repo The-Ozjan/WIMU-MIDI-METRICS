@@ -1,9 +1,14 @@
 import music21 as m21
 
-file_path = r"C:\Users\Hubert\PycharmProjects\WIMU-MIDI-METRICS\data\known_time_signatures\sonate_27_(c)hisamori-ts34-24.mid"
 
+def find_tempo(midi_file_path: str):
+    """
+    Gathers information about music tempo from a MIDI file
 
-def find_tempo(midi_file_path):
+    midi_file_path: specify a path to the file you want to analyze
+
+    returns: list of time offsets when the data appears, list of tempo values throughout the file
+    """
     midi_stream = m21.converter.parse(midi_file_path)
     metronome = midi_stream.flatten().getElementsByClass(m21.tempo.MetronomeMark)
     offsets = []

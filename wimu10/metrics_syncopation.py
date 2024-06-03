@@ -42,6 +42,7 @@ def calc_syncopation(model: str, file_path: str, parameters=None, outfile: str=N
 
     return output
 
+
 def syncopation_by_bar_plot(data: SYNCOPATION_DATA) -> None:
     """
     Generates a bar plot with syncopation value of each bar.
@@ -55,6 +56,7 @@ def syncopation_by_bar_plot(data: SYNCOPATION_DATA) -> None:
     plt.ylabel('Syncopation strength')
     plt.show()
     return
+
 
 def syncopation_metrics_chart(data: SYNCOPATION_DATA) -> None:
     """
