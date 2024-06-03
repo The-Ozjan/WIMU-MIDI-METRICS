@@ -69,7 +69,7 @@ Z datasetu `musicnet` wybrano kilkanaście utworów należących do jednej z gru
 
 Przeprowadzono test sprawdzający, czy utwory utworzą klastry w przestrzeni parametrów ukrytych - tj. czy utwory głośne będą blisko siebie a daleko cichych i vice versa.
 
-![odl](../../images/clamp/odległości.png)
+![odl](../../images/clamp/odleglosci.png)
 
 Wyniki eksperymentu nie doprowadziły do jednoznacznych konkluzji. Nie widać jednoznacznej zależności między dynamiką a centroidami utworów.
 Jedynie pliki z ostatniej grupy znajdują się bliżej siebie niż z pozostałych grup, co może wskazywać na ich podobieństwo w innych cechach, niezwiązanych zupełnie z głośnością.
@@ -86,4 +86,4 @@ Zbadano jeszcze w których wymiarach odległości między punktami były najmnie
 
 Również wartości tych odległości nie dają zadowalających jednoznacznych odpowiedzi. Jedynie że największe wartości odpowiadają w przybliżeniu odległości centroid (co nie jest żadnym odkryciem).
 
-![war](../../images/clamp/wartości.png)
+![war](../../images/clamp/wartosci.png)
