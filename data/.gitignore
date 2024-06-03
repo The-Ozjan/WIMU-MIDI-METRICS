@@ -13,5 +13,7 @@
 !midi_with_keys/**
 !clamp_test
 !clamp_test/**
+!clamp_ebd_test
+!clamp_ebd_test/**
 !midi_syncopation
 !midi_syncopation/**
