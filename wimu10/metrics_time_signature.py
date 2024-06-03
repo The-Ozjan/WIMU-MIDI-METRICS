@@ -7,8 +7,10 @@ def find_time_signature(midi_file_path):
     midi_stream = m21.converter.parse(midi_file_path)
     tsList = midi_stream.flatten().getTimeSignatures()
 
-    result = []
-    for ts in tsList:
-        result.append((ts.offset, ts.ratioString))
+    offsets = []
+    ratios = []
+    for signature in tsList:
+        offsets.append(signature.offset)
+        ratios.append(signature.ratioString)
 
-    return result
+    return offsets, ratios

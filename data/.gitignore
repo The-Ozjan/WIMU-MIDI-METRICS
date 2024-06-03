@@ -13,3 +13,5 @@
 !midi_with_keys/**
 !clamp_test
 !clamp_test/**
+!midi_syncopation
+!midi_syncopation/**

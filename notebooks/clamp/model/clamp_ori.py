@@ -1,7 +1,10 @@
 import argparse
 import subprocess
-from utils import *
 from transformers import AutoTokenizer
+try:
+    from notebooks.clamp.model.utils import *
+except:
+    from utils import *
 
 if torch.cuda.is_available():    
     device = torch.device("cuda")
