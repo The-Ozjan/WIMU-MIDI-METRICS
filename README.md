@@ -20,7 +20,7 @@ A. Metryki dotyczące:
 
 B. (opcjonalnie) Porównanie zależności naszych (oraz uprzednio opracowanych) metryk z istniejącymi w bibliotece MusPy. ❓  
 C. Porównanie jakości tokenizatorów MIDI dostępnych w bibliotece MidiTok. ❌  
-D. Eksperymentalne metryki korzystające z embeddingów CLAMP. ✔️
+D. Eksperymentalne metryki korzystające z embeddingów CLAMP. ✔️ 
 E. (opcjonalnie) Zastosowanie istniejących i opracowanych metryk MIDI do innych zapisów symbolicznych, np. ABC. ❓  
 
 W procesie tworzenia projektu postanowiliśmy pominąć punkty B oraz C i skupić się bardziej na metrykach korzystających z embeddingów CLAMP. Jeśli wystarczy czasu, rozważamy powrót do punktu B.
