@@ -6,6 +6,22 @@ Podczas badania CLaMP sprawdzane było jak radzi on sobie z zadaniami wyszukiwan
 
  Podczas testów wykorzystane zostały dwa warianty, CLaMP-S/512 oraz CLaMP-S/1024. Pierwszy z nich działał lepiej dla badań, które przeprowadziliśmy.Najpierw sprawdzone zostało jak CLaMP radzi sobie podczas dopasowywania zapytań tekstowych do muzyki. Nie najgorzej dopasowywuje tekst zawierający gatunek do utworu. Trochę gorzej radzi sobie z tekstami opisującymi emocje bądź też informacje takie jak czy dzieło zostało zagrane w filmie, natomiast wśród 5 najbardziej prawdopodobnych utworów często można znaleźć taki który pasuje. Przy podawaniu utworu i dopasowywaniu do odpowiedniego zdania otrzymywane rezultaty czasami były zgodne natomiast nie były one tak dobre jak podczas wcześniejszego badania. Na końcu wykonane zostały porównania utworów.
 
+**Poniżej umieszczone zostały przykładowe wyniki:**
+
+Dla tekstowego zapytania "*This song genre is Country*"
+
+![imgclamp](../../images/This%20song%20genre%20is%20Country.png)
+
+Dla tekstowego zapytania "*This song is from movie*"
+
+![imgclamp](../../images/This%20song%20is%20from%20movie.png)
+
+Dla piosenki "*Call Me Maybe.mxl*"
+
+![imgclamp](../../images/Call%20Me%20Maybe.mxl.png)
+
+Porównanie muzyki " *Godfather Theme.mxl*" do innych
+![imgclamp](../../images/m2mThe%20Godfather%20Theme.mxl.png)
 ## Rozwinięcie badań nad embeddingami
 
 Jako rozwinięcie wcześniejszych badań nad embedingami CLaMPa, które sprawdzały wariancję embedingów, wyznaczona została średnia odległość kosinusowa dla danego twórcy i zapytania tekstowego. Przykładowa tabela dla zapytania "It is composed by Johannes Brahms"
