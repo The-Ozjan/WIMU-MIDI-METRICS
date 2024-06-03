@@ -53,7 +53,7 @@ Z datasetu `musicnet` wybrano kilkanaście utworów należących do jednej z gru
 
 Przeprowadzono test sprawdzający, czy utwory utworzą klastry w przestrzeni parametrów ukrytych - tj. czy utwory głośne będą blisko siebie a daleko cichych i vice versa.
 
-[tu obrazek]
+![odl](../../images/clamp/odległości.png)
 
 Wyniki eksperymentu nie doprowadziły do jednoznacznych konkluzji. Nie widać jednoznacznej zależności między dynamiką a centroidami utworów.
 Jedynie pliki z ostatniej grupy znajdują się bliżej siebie niż z pozostałych grup, co może wskazywać na ich podobieństwo w innych cechach, niezwiązanych zupełnie z głośnością.
@@ -62,23 +62,12 @@ Jedynie pliki z ostatniej grupy znajdują się bliżej siebie niż z pozostałyc
 
 Kolejnym badaniem było sprawdzenie czy któreś ze współrzędnych (lub grup współrzędnych) odpowiadają głośności utworu. Badanie surowych embeddingów jest mało miarodajne, ponieważ nie wiemy który wymiar za co odpowiada, a jest ich zbyt dużo żeby analizować je pojedynczo. Rzut oka na ich wektor nie wykazał wyraźnych różnic między grupami w danych wymiarach.
 
-[tu obrazek]
+![emb](../../images/clamp/embeddings.png)
 
 Zbadano jeszcze w których wymiarach odległości między punktami były najmniejsze i największe. Ponownie nie uzyskano zadowalającego rezultatu, między każdą parą punktów wymiar najmniejszej różnicy był inny, nie zaobserwowano jednoznacznych korelacji z głośnością.
 
-[tu obrazek]
+![ind](../../images/clamp/indeksy.png)
 
-### Badanie odległości do promptów tekstowych
+Również wartości tych odległości nie dają zadowalających jednoznacznych odpowiedzi. Jedynie że największe wartości odpowiadają w przybliżeniu odległości centroid (co nie jest żadnym odkryciem).
 
-Tym razem porzucono embeddingi kompletnie i skupiono się na łączeniu modalności, którą CLaMP oferuje. Metrykę można zapisać w postaci zapytania tekstowego, a następnie zbadać odległość kosinusową między nim a utworami.
-Wybrano trzy prompty:
-
-- "this song is loud"
-- "this song is quiet"
-- "this song is neither loud nor quiet"
-
-Należałoby się spodziewać, że utwory ciche będą "bliżej" prompta "this song is quiet" i analogicznie z utworami głośnymi.
-
-[tu obrazek]
-
-Wnioski - zależy co wyjdzie w obrazku, ale raczej chu... słabo
+![war](../../images/clamp/wartości.png)
