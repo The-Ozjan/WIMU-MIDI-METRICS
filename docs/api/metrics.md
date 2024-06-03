@@ -16,6 +16,21 @@
 ```
 
 ```{eval-rst}
+.. automodule:: wimu10.metrics_key
+   :members:
+```
+
+```{eval-rst}
+.. automodule:: wimu10.metrics_tempo
+   :members:
+```
+
+```{eval-rst}
+.. automodule:: wimu10.metrics_time_signature
+   :members:
+```
+
+```{eval-rst}
 .. automodule:: wimu10.metrics_syncopation
    :members:
 ```
