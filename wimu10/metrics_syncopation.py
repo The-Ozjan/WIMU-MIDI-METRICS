@@ -35,9 +35,10 @@ def calc_syncopation(model: str, file_path: str, parameters=None, outfile: str=N
 
 def syncopation_by_bar_plot(data: SYNCOPATION_DATA) -> None:
     y = data['syncopation_by_bar']
-    x = range(len(y))
+    x = range(1, len(y) + 1)
     plt.bar(x, y)
-    plt.title('Syncopation by bar')
+    plt.title('Syncopation by bar for model ' + data['model_name'])
+    plt.xlim(0.5, len(x) + 0.5)
     plt.xlabel('Bars')
     plt.ylabel('Syncopation strength')
     plt.show()
@@ -53,6 +54,7 @@ def syncopation_metrics_chart(data: SYNCOPATION_DATA) -> None:
     y = [max_syncopation, mean_non_zero_syncopation, data['mean_syncopation_per_bar']]
 
     _, (ax1, ax2) = plt.subplots(2, 1, figsize=(6, 5), gridspec_kw={'height_ratios': [3, 1]})
+    ax1.set_title('Syncopation metrics for model ' + data['model_name'])
     ax1.bar(x, y)
     ax2.barh(1, bars_with_syncopation_percent)
     ax2.set_yticks([1])

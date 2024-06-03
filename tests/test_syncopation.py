@@ -16,12 +16,12 @@ def test_multitrack_wrong_model():
         if model == 'TOB' or model == 'WNBD':
             continue
         with pytest.raises(Exception, match='Chosen model do not accept multi-track files! Choose TOB or WNBD instead.'):
-            sp.calc_syncopation(model, 'tests/data/syncopation/test32.mid')
+            sp.calc_syncopation(model, 'tests/data/syncopation/cmajor.mid')
 
 def test_multitrack():
-    out = sp.calc_syncopation('TOB', 'tests/data/syncopation/test32.mid')
+    out = sp.calc_syncopation('TOB', 'tests/data/syncopation/cmajor.mid')
     assert len(out['syncopation_by_bar']) == out['number_of_bars']
-    out = sp.calc_syncopation('WNBD', 'tests/data/syncopation/test32.mid')
+    out = sp.calc_syncopation('WNBD', 'tests/data/syncopation/cmajor.mid')
     assert len(out['syncopation_by_bar']) == out['number_of_bars']
 
 
