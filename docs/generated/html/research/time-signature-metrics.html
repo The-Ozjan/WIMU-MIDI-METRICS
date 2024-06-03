@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metrum i tempo &mdash; WIMU 10  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Miary synkopy" href="syncope-metrics.html" />
+    <link rel="prev" title="Miary tonacji" href="key-metrics.html" />
+  
+  
+    
+  
+    
+  
+  
+  
+  
+   
+  <link rel="preload" href="../_static/css/fonts/fontawesome-webfont.woff2?af7ae505a9eed503f8b8e6982036873e" as="font">
+  <link rel="stylesheet" href="../_static/css/index.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/dark.css" media="(prefers-color-scheme: dark)" />
+  <script src="../_static/js/scheme-switcher.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            WIMU 10
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informacje Ogólne</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">Licencja</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DESIGN_PROPOSAL.html">Design Proposal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Dokumentacja API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/metrics.html">Metryki</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/utils.html">Narzędzia</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="chords-metrics.html">Miary oparte o akordy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamics-metrics.html">Miary oparte o dynamikę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embeddings.html">Embeddingi CLaMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self_similarity.html">Samopodobieństwo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenization.html">Tokenizacja</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Nowe eksperymenty</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="key-metrics.html">Miary oparte o tonacje</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Miary oparte o tempo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zbiory-danych">Zbiory danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opis">Opis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fundamenty-funkcji">Fundamenty funkcji</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sposob-dzialania">Sposób działania</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wyniki">Wyniki</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bibliografia">Bibliografia</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="syncope-metrics.html">Miary oparte o synkopę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clamp-tests.html">Nowe testy CLaMP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WIMU 10</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metrum i tempo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/research/time-signature-metrics.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="metrum-i-tempo">
+<h1>Metrum i tempo<a class="headerlink" href="#metrum-i-tempo" title="Link to this heading"></a></h1>
+<section id="zbiory-danych">
+<h2>Zbiory danych<a class="headerlink" href="#zbiory-danych" title="Link to this heading"></a></h2>
+<p>Przykładowe pliki z rozszerzeniem .mid można pobrać ze strony internetowej https://kunstderfuge.com/</p>
+<p>Portal zawiera kompozycje w formacie MIDI wielu znanych kompozytorów, dostępne do pobrania za darmo.</p>
+</section>
+<section id="opis">
+<h2>Opis<a class="headerlink" href="#opis" title="Link to this heading"></a></h2>
+<section id="fundamenty-funkcji">
+<h3>Fundamenty funkcji<a class="headerlink" href="#fundamenty-funkcji" title="Link to this heading"></a></h3>
+<p>Funkcjonalność oparta jest na metodach biblioteki music21.
+Zapis metrum można wczytać z pliku MIDI za pomocą metody getTimeSignatures() po uprzednim wypłaszczeniu hierarchii elementów wczytanego pliku.
+Tempo zapisane w plikach MIDI jest odczytywane przez bibliotekę jako obiekty klasy MetronomeMark.
+Obiekty można wyszukać w pliku za pomocą metody getElementsByClass(). getTimeSignatures() jest skróconą wersją tej metody odpowiednią dla metrum.</p>
+</section>
+<section id="sposob-dzialania">
+<h3>Sposób działania<a class="headerlink" href="#sposob-dzialania" title="Link to this heading"></a></h3>
+<p>Z punktu widzenia biblioteki music21 zarówno metrum, jak i tempo są zapisane w obiektach podklas klasy Music21Object.
+Można więc wczytywać dane o czasie wystąpienia i wartości tych miar bezpośrednio z plików MIDI.
+Głównym działaniem stworzonych funkcji jest wyłuskanie interesujących obiektów ze strumienia informacji po wczytaniu pliku .mid.
+Następnie czas wystąpienia obiektu w strumieniu (offset) oraz wartość są zapisywane do osobnych kolekcji, co umożliwia wizualizację danych.</p>
+</section>
+</section>
+<section id="wyniki">
+<h2>Wyniki<a class="headerlink" href="#wyniki" title="Link to this heading"></a></h2>
+<p>Poniższe wykresy są przykładowymi wizualizacjami danych zawartych w plikach MIDI, dotyczących metrum i tempa muzyki.
+<strong>Wykresy zmian wartości w czasie pomagają w ocenie złożoności analizowanego utworu oraz stanowią prosty sposób na dostęp do kluczowych informacji o kompozycji.</strong></p>
+<figure class="align-default" id="id1">
+<img alt="a" src="../_images/ts_example.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 1. Wykres wartości metrum w czasie dla utworu Ludwiga van Beethovena Sonata e-moll op.90 nr 27</em></span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<img alt="a" src="../_images/tempo_example.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 2. Wykres wartości tempa w czasie dla utworu Ludwiga van Beethovena Sonata e-moll op.90 nr 27</em></span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bibliografia">
+<h2>Bibliografia<a class="headerlink" href="#bibliografia" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://kunstderfuge.com/">kunstderfuge.com: The Largest Resource of Classical Music in .mid files</a></p>
+<p><a class="reference external" href="https://web.mit.edu/music21/doc/usersGuide/usersGuide_14_timeSignatures.html">music21 User’s Guide: Chapter 14: Time Signatures and Beats</a></p>
+<p><a class="reference external" href="https://web.mit.edu/music21/doc/moduleReference/moduleTempo.html">music21.tempo</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="key-metrics.html" class="btn btn-neutral float-left" title="Miary tonacji" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="syncope-metrics.html" class="btn btn-neutral float-right" title="Miary synkopy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, WIMU 10 Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <script>createSchemeSwitcher()</script>
+
+
+</body>
+</html>

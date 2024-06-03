@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miary oparte o akordy &mdash; WIMU 10  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Miary oparte o dynamikę" href="dynamics-metrics.html" />
+    <link rel="prev" title="Narzędzia" href="../api/utils.html" />
+  
+  
+    
+  
+    
+  
+  
+  
+  
+   
+  <link rel="preload" href="../_static/css/fonts/fontawesome-webfont.woff2?af7ae505a9eed503f8b8e6982036873e" as="font">
+  <link rel="stylesheet" href="../_static/css/index.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/dark.css" media="(prefers-color-scheme: dark)" />
+  <script src="../_static/js/scheme-switcher.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            WIMU 10
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informacje Ogólne</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">Licencja</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DESIGN_PROPOSAL.html">Design Proposal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Dokumentacja API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/metrics.html">Metryki</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/utils.html">Narzędzia</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Eksperymenty</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Miary oparte o akordy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#zbiory-danych">Zbiory danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#opis-metryk">Opis metryk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#histogram-akordow">Histogram akordów</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#macierz-przejsc-akordow">Macierz przejść akordów</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wyniki-dla-wygenerowanych-danych">Wyniki dla wygenerowanych danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wnioski">Wnioski</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#przyszle-rozszerzenia">Przyszłe rozszerzenia</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bibliografia">Bibliografia</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamics-metrics.html">Miary oparte o dynamikę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embeddings.html">Embeddingi CLaMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="self_similarity.html">Samopodobieństwo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenization.html">Tokenizacja</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Nowe eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="key-metrics.html">Miary oparte o tonacje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time-signature-metrics.html">Miary oparte o tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="syncope-metrics.html">Miary oparte o synkopę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clamp-tests.html">Nowe testy CLaMP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WIMU 10</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Miary oparte o akordy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/research/chords-metrics.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="miary-oparte-o-akordy">
+<h1>Miary oparte o akordy<a class="headerlink" href="#miary-oparte-o-akordy" title="Link to this heading"></a></h1>
+<p>W ramach projektu zostały zaproponowane dwie miary, wysokościowe oraz harmoniczne, oparte o akordy.
+Miary te przyjęły postać dwóch statysyk:</p>
+<ul class="simple">
+<li><p>histogramu akordów,</p></li>
+<li><p>macierzy przejść akordów.</p></li>
+</ul>
+<section id="zbiory-danych">
+<h2>Zbiory danych<a class="headerlink" href="#zbiory-danych" title="Link to this heading"></a></h2>
+<p>Metryki zostały przedstawione na utworze “L.v.Beethoven 3mov - Piano Sonata No.4 in Eb Major Op.7” ze zbioru MusicNet<a class="footnote-reference brackets" href="#thickstun2017" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> oraz dla danych syntetycznych, wygenerowanych z wykorzystaniem różnych narzędzi, m.in.:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/asigalov61/Giant-Music-Transformer">GiantMusicTransformer</a> - różne wartości temperatury: 0.9, 0.15, 1.0 (<a class="reference external" href="https://github.com/asigalov61/Giant-Music-Transformer">GiantMusicTransformer</a> to nowoczesny wieloinstrumentalny transformer muzyczny. Tymczasem <code class="docutils literal notranslate"><span class="pre">temperatura</span></code> odnosi się do parametru używanego w funkcji softmax, który wpływa na stopień pewności lub różnorodność predykcji modelu. Im wartość jest wyższa tym model jest bardziej różnorodny, a im jest niższa to jest bardziej pewny siebie.),</p></li>
+<li><p><a class="reference external" href="https://midirandomizer.sourceforge.net/">MidiRandomizer</a> - narzędzie do generowania losowych plików MIDI,</p></li>
+<li><p><a class="reference external" href="https://github.com/tensorflow/docs/blob/master/site/en/tutorials/audio/music_generation.ipynb">TensorFlow-RNN</a> - różne wartości temperatury: 0.25, 2.0, 3.0 oraz 10.0 (<a class="reference external" href="https://github.com/tensorflow/docs/blob/master/site/en/tutorials/audio/music_generation.ipynb">TensorFlow-RNN</a> to rekurencyjna sieć neuronowa wytrenowana na podzbiorze zestawu danych <a class="reference external" href="https://magenta.tensorflow.org/datasets/maestro">MAESTRO</a>).</p></li>
+</ul>
+<p>Wygenerowane dane znajdują sie w katalogu <code class="docutils literal notranslate"><span class="pre">.data\generated</span></code> w odpowiednych podfolderach:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gmt</span></code> - GiantMusicTransformer,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mr</span></code> - MidiRandomizer,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf_rnn</span></code> - TensorFlow-RNN.</p></li>
+</ul>
+<p>Wyniki dla każdego z wygenerowanych zestawów można odtworzyć za pomocą podanych poleceń:</p>
+<ul class="simple">
+<li><p>GiantMusicTransformer - <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">notebooks.chords_analysis</span> <span class="pre">gtm</span></code></p></li>
+<li><p>MidiRandomizer - <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">notebooks.chords_analysis</span> <span class="pre">md</span></code></p></li>
+<li><p>TensorFlow-RNN - <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">notebooks.chords_analysis</span> <span class="pre">tf_rnn</span></code></p></li>
+</ul>
+</section>
+<section id="opis-metryk">
+<h2>Opis metryk<a class="headerlink" href="#opis-metryk" title="Link to this heading"></a></h2>
+<section id="histogram-akordow">
+<h3>Histogram akordów<a class="headerlink" href="#histogram-akordow" title="Link to this heading"></a></h3>
+<p>Funkcja:</p>
+<details><summary>chords_histogram</summary>
+Argumenty:
+- `track` - badana ścieżka (obiekt typu `muspy.Track`),
+- `readable_output` - w jakim formacie zwrócić akordy (obecnie obsługiwana jest format liczbowy MIDI oraz notacja klawiszowa na pianinie [wartości: 'midi', 'piano']),
+- `error_frame` - odstęp jaki może nastąpić pomiędzy poszczególnymi pojedyńczymi nutami by nadal zostały zidentyfikowane jako jeden akord (podawany w impulsach zegarowych). Ze względu na to, że nuty jednego akordu mogą zostać zanotowane z lekkimi opóźnieniami (ze względu na styl grania danej osoby, sposób w jaki został przekonwertowany utwór do MIDI,błąd ludzki lub sprzętowy), wartość ta została wprowadzona by zaniechać identyfikacji kilku mniejszych akordów, gdzie znajduje się jeden pojedynczy akord.
+</details>
+<p>Histogram akordów pozwala na łatwiejszą analizę typu oraz częstości występowania poszczególnych akordów w utworze. Korzystanie z metryki umożliwia sprawniejszą identyfikację utworów z nienaturalnym, odstępującym od normy rozkładem.</p>
+<figure class="align-default" id="id2">
+<img alt="a" src="../_images/experiment-chord_histogram.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 1. Przykład histogramu akordów wyliczonego dla utworu nr 151 ze zbioru MusicNet</em></span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="macierz-przejsc-akordow">
+<h3>Macierz przejść akordów<a class="headerlink" href="#macierz-przejsc-akordow" title="Link to this heading"></a></h3>
+<p>Funkcja:</p>
+<details><summary>chords_transition_matrix</summary>
+Argumenty:
+- `track` - badana ścieżka (obiekt typu `muspy.Track`),
+- `readable_output` - w jakim formacie zwrócić akordy (obecnie obsługiwana jest format liczbowy MIDI oraz notacja klawiszowa na pianinie [wartości: 'midi', 'piano']),
+- `error_frame` - odstęp jaki może nastąpić pomiędzy poszczególnymi pojedyńczymi nutami by nadal zostały zidentyfikowane jako jeden akord (podawany w impulsach zegarowych). Ze względu na to, że nuty jednego akordu mogą zostać zanotowane z lekkimi opóźnieniami (ze względu na styl grania danej osoby, sposób w jaki został przekonwertowany utwór do MIDI,błąd ludzki lub sprzętowy), wartość ta została wprowadzona by zaniechać identyfikacji kilku mniejszych akordów, gdzie znajduje się jeden pojedynczy akord.
+</details>
+<p>Macierz przejść akordów przedstawia graficznie prawdopodbieństwa przejścia z jednego akordu do drugiego. Kolorowe punkty na mapie reprezentują przejście z akordu na osi Y do odpowiednieka na osi X.</p>
+<figure class="align-default" id="id3">
+<img alt="a" src="../_images/experiment-chord_transition.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 2. Przykład macierzy przejść akordów wyliczonej dla utworu nr 151 ze zbioru MusicNet</em></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="wyniki-dla-wygenerowanych-danych">
+<h2>Wyniki dla wygenerowanych danych<a class="headerlink" href="#wyniki-dla-wygenerowanych-danych" title="Link to this heading"></a></h2>
+<p>W przypadku danych z MidiRandomizer oraz TensorFLow-RNN wszystkie wyniki wyglądały identycznie:</p>
+<figure class="align-default" id="id4">
+<img alt="a" src="../_images/exp_analysis_tf_rnn.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 3. Macierz przejść i histogram akordów dla pliku ‘tf_rnn-000.mid’</em></span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>W żadnym z wygenerowanych plików dla obu zbiorów nie zostały wykryte akordy. W obu przypadakach utwory są generowane dźwięk po dźwięku, na wskutek czego nie dochodzi w żadnym momencie do wielobrzmienia.</p>
+<p>W przypadku zestawu GiantMusicTransformer pojawiło sie kilka bardziej nadających się do analizy przypadków. W miarę możliwości dla każdego z nich będzie określona jakość utworu oraz jak to jest powiązane z wynikami metryk.</p>
+<p>Utwór <code class="docutils literal notranslate"><span class="pre">gmt-009.mid</span></code> charakteryzuje się brakiem struktury i spójności. Akordy są odgrywane w sposób całkowicie losowy. Macierzą przejść dominuje pojedyncza diagonala, co sugeruje, że prawie nigdy, poza jednym przypadkiem, nie wracamy do wcześniej występujących akordów.
+Na histogramie widać rozkład głównie jednorodny, gdzie prawie wszystkie akordy pojawiają się tylko raz. Przykładami danych o podobnej charakterystyce dźwięku oraz podobnych wynikach metryk były: <code class="docutils literal notranslate"><span class="pre">gmt-002.mid</span></code>, <code class="docutils literal notranslate"><span class="pre">gmt-010.mid</span></code> oraz <code class="docutils literal notranslate"><span class="pre">gmt-011.mid</span></code>.</p>
+<figure class="align-default" id="id5">
+<img alt="a" src="../_images/exp_analysis_gmt_random.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 4. Macierz przejść i histogram akordów dla pliku ‘gmt-009.mid’</em></span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>W przypadku <code class="docutils literal notranslate"><span class="pre">gmt-000.mid</span></code> dominuje jeden akord, pozostałych praktycznie nie widać. Wynikowa macierz przejść nie jest wprost przekątną, ma znacznie większą różnorodność. Histogramem dominuje głównie jeden akord, znajdują się również 4 akordy drugorzędne i pojedyncze wystąpienia innych akordów. Utworami posiadającymi podobny charakter oraz identyczne wyniki metryk były: <code class="docutils literal notranslate"><span class="pre">gmt-003.mid</span></code> oraz <code class="docutils literal notranslate"><span class="pre">gmt-001.mid</span></code>.</p>
+<figure class="align-default" id="id6">
+<img alt="a" src="../_images/exp_analysis_gmt_outnumbers.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 5. Macierz przejść i histogram akordów dla pliku ‘gmt-000.mid’</em></span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Ekstremalnym przypadkiem dominującego akordu są <code class="docutils literal notranslate"><span class="pre">gmt-004.mid</span></code>, <code class="docutils literal notranslate"><span class="pre">gmt-005.mid</span></code> oraz <code class="docutils literal notranslate"><span class="pre">gmt-006.mid</span></code>, gdzie grany jest prawie wyłącznie tylko jeden akord.</p>
+<figure class="align-default" id="id7">
+<img alt="a" src="../_images/exp_analysis_gmt_one.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 6. Macierz przejść i histogram akordów dla pliku ‘gmt-004.mid’</em></span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Najlepiej brzmiącym utworem był <code class="docutils literal notranslate"><span class="pre">gmt-008.mid</span></code> wygenerowany z temperaturą 1.0. Z wszystkich danych wygenerowanych przy pomocy GiantMusicTransformer, ten charakteryzował się największa spójnością. Wyników dla tego utworu są bardzo zbliżone do utworów ze zbioru MusicNet. W macierzy przejść duże skupienie ‘przejść’ jest widoczne na przękatnej, z lekkimi wariacjami odbywającymi się co kilka akordów. Na histogramie ponownie zauważamy motyw gdzie dominuje jeden akord, jest kilka akordów drugorzędnych oraz wiele pojedynczych akordów. Po syntezie MIDI jest to też najlepiej brzmiący utwór ze wszystkich wygenerowanych.</p>
+<figure class="align-default" id="id8">
+<img alt="a" src="../_images/exp_analysis_gmt_best.png" />
+<figcaption>
+<p><span class="caption-text"><em>Rys. 7. Macierz przejść i histogram akordów dla pliku ‘gmt-008.mid’</em></span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="wnioski">
+<h2>Wnioski<a class="headerlink" href="#wnioski" title="Link to this heading"></a></h2>
+<p>Metryki te pozwalają zwizualizować akordy w utworze, co pozwala na wstępną analizę czy utwór jest spójny czy nie.</p>
+<p>Zarówno kompletny chaos, jak i idealny porządek w postaci przekątnej na wykresie przejść akordów, sugeruje, że utwór nie ma żadnej struktury.</p>
+<p>Podobne informacje możemy czerpać z histogramu, gdzie brak dominujących akordów lub zbyt duża dominancja pozbawia utwór oryginalności i struktury. W tym wypadku dobrym podziałem okazał się jeden akord dominujący, ok. 4 akordy o połowie jego częstotliwości występowania oraz bogata ilość innych akordów, które występują rzadko, ok. 1-2 razy.</p>
+</section>
+<section id="przyszle-rozszerzenia">
+<h2>Przyszłe rozszerzenia<a class="headerlink" href="#przyszle-rozszerzenia" title="Link to this heading"></a></h2>
+<p>Potencjalnym punktem rozwoju metryk jest uwzględnienie faktu, że akordy są do siebie podobne, np.:</p>
+<ul class="simple">
+<li><p>akord jest innym akordem wzbogaconym o nutę,</p></li>
+<li><p>akord jest innym akordem z pojedynczą zmienioną nutą,</p></li>
+<li><p>akord jest innym akordem, ale z nut w innych oktawach,</p></li>
+<li><p>akord jest ton wyżej w wybranym kluczu.
+Jest to istotne, ponieważ zbliżone do siebie akordy brzmią naturalnie dla ucha ludzkiego, a na obecnych metrykach są ułożone arbitralnie i nie widać po między nimi żadnego połączenia.</p></li>
+</ul>
+</section>
+<section id="bibliografia">
+<h2>Bibliografia<a class="headerlink" href="#bibliografia" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="thickstun2017" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1611.09827">“Learning Features of Music from Scratch”, John Thickstun et al., 2017</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../api/utils.html" class="btn btn-neutral float-left" title="Narzędzia" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dynamics-metrics.html" class="btn btn-neutral float-right" title="Miary oparte o dynamikę" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, WIMU 10 Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <script>createSchemeSwitcher()</script>
+
+
+</body>
+</html>

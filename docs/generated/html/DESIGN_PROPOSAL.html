@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Proposal &mdash; WIMU 10  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Metryki" href="api/metrics.html" />
+    <link rel="prev" title="Licencja" href="LICENSE.html" />
+  
+  
+    
+  
+  
+  
+  
+   
+  <link rel="preload" href="_static/css/fonts/fontawesome-webfont.woff2?af7ae505a9eed503f8b8e6982036873e" as="font">
+  <link rel="stylesheet" href="_static/css/index.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/dark.css" media="(prefers-color-scheme: dark)" />
+  <script src="_static/js/scheme-switcher.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            WIMU 10
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informacje Ogólne</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="LICENSE.html">Licencja</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Design Proposal</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wstep">Wstęp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planowane-funkcjonalnosci">Planowane funkcjonalności</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zbiory-danych">Zbiory danych</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planowany-zakres-eksperymentow">Planowany zakres eksperymentów</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planowany-stack-technologiczny">Planowany stack technologiczny</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#harmonogram-i-planowany-postep">Harmonogram i planowany postęp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bibliografia">Bibliografia</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Dokumentacja API</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/metrics.html">Metryki</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/utils.html">Narzędzia</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="research/chords-metrics.html">Miary oparte o akordy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/dynamics-metrics.html">Miary oparte o dynamikę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/embeddings.html">Embeddingi CLaMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/self_similarity.html">Samopodobieństwo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/tokenization.html">Tokenizacja</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Nowe eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="research/key-metrics.html">Miary oparte o tonacje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/time-signature-metrics.html">Miary oparte o tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/syncope-metrics.html">Miary oparte o synkopę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="research/clamp-tests.html">Nowe testy CLaMP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">WIMU 10</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Design Proposal</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DESIGN_PROPOSAL.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="design-proposal">
+<h1>Design Proposal<a class="headerlink" href="#design-proposal" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p>Jakub Sadowski</p></li>
+<li><p>Wiktor Targosiński</p></li>
+<li><p>Hubert Wysocki</p></li>
+</ul>
+<section id="wstep">
+<h2>Wstęp<a class="headerlink" href="#wstep" title="Link to this heading"></a></h2>
+<p>Projekt jest kontynuacją projektu o takim samym tytule z semestru 23Z. Rozszerzone zostanie repozytorium <a class="reference external" href="https://github.com/Dove6/WIMU10">WIMU10</a>. Głównym celem jest zbadanie metryk dla muzyki generowanej w zapisie symbolicznym, w formacie MIDI <a class="footnote-reference brackets" href="#back1999" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+<p>Repozytorium zawierać będzie również przykładowy program (skrypt) konsolowy prezentujący sposób korzystania z API.
+Program pozwalał będzie na wyznaczenie metryk dla wybranych plików w trybie wsadowym.</p>
+</section>
+<section id="planowane-funkcjonalnosci">
+<h2>Planowane funkcjonalności<a class="headerlink" href="#planowane-funkcjonalnosci" title="Link to this heading"></a></h2>
+<p>Planowane rozszerzenie istniejącego projektu zawierać będzie:</p>
+<p>A. Metryki dotyczące:</p>
+<ul class="simple">
+<li><p>rytmu - synkopa, metrum</p></li>
+<li><p>wysokości/harmonii - zmiany tonacji</p></li>
+<li><p>agogiki - zmiany tempa</p></li>
+</ul>
+<p>B. Porównanie zależności naszych (oraz uprzednio opracowanych) metryk z istniejącymi w bibliotece MusPy.<br />
+C. Porównanie jakości tokenizatorów MIDI dostępnych w bibliotece MidiTok.<br />
+D. Eksperymentalne metryki korzystające z embeddingów CLAMP.<br />
+E. (opcjonalnie) Zastosowanie istniejących i opracowanych metryk MIDI do innych zapisów symbolicznych, np. ABC.</p>
+</section>
+<section id="zbiory-danych">
+<h2>Zbiory danych<a class="headerlink" href="#zbiory-danych" title="Link to this heading"></a></h2>
+<p>Eksperymenty dotyczące metryk które chcemy zbadać, wykonane zostaną dla danych ze  zbiorów zaproponowanych w pracy <a class="reference external" href="https://github.com/Dove6/WIMU10">WIMU10</a>. W jego skład wchodzą zbiory:</p>
+<ul class="simple">
+<li><p>The Lakh MIDI Dataset <a class="footnote-reference brackets" href="#raffel2016dataset" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#raffel2016" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>,</p></li>
+<li><p>MAESTRO <a class="footnote-reference brackets" href="#hawthorne2019" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>,</p></li>
+<li><p>NES-MDB (Nintendo Entertainment System Music Database) <a class="footnote-reference brackets" href="#donahue2018" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>,</p></li>
+<li><p>MusicNet <a class="footnote-reference brackets" href="#thickstun2017" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>,</p></li>
+<li><p>EMOPIA <a class="footnote-reference brackets" href="#hung2021" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>,</p></li>
+</ul>
+<p>oraz utwory w MIDI wygenerowane z użyciem istniejących, wytrenowanych modeli uczenia maszynowego (technologia GAN <a class="footnote-reference brackets" href="#dong2017" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> lub Transformer <a class="footnote-reference brackets" href="#huang2018" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a>). Uzyskane przez nas wyniki zostaną porównane z dostępnymi metrykami w bibliotece MusPy. Po wykonanych badaniach wszystkie uzyskane wyniki zostaną podsumowane.</p>
+</section>
+<section id="planowany-zakres-eksperymentow">
+<h2>Planowany zakres eksperymentów<a class="headerlink" href="#planowany-zakres-eksperymentow" title="Link to this heading"></a></h2>
+<p>Planujemy wykonać część zadań, które zostały pominięte w poprzedniej realizacji projektu, oraz dołożyć parę innych:</p>
+<ol class="arabic simple">
+<li><p>Dla wybranych zbiorów danych porównamy metryki z MusPy z naszymi.
+Sprawdzimy, czy są od siebie zależne, tzn. czy kierunek zmiany obu metryk jest skorelowany.</p></li>
+<li><p>(opcjonalnie) Zbadamy, jak mają się wartości metryk na wybranych utworach do naszych odczuć.
+Zrobimy to w sposób porównawczy, prezentując badanej osobie dwa utwory o różnych wartościach metryk.
+Potencjalnie wykorzystamy do oceny skalę Likerta z ogólnymi stwierdzeniami postaci “Utwór nr 1 brzmi lepiej niż utwór nr 2”.</p></li>
+<li><p>Dokonamy porównania jakościowego tokenizatorów z biblioteki MidiTok.</p></li>
+<li><p>Przeanalizujemy korelację embeddingów CLAMP z naszymi metrykami, oraz tymi z MusPy. Utworzymy eksperymentalne metryki korzystające z embeddingów.</p></li>
+</ol>
+</section>
+<section id="planowany-stack-technologiczny">
+<h2>Planowany stack technologiczny<a class="headerlink" href="#planowany-stack-technologiczny" title="Link to this heading"></a></h2>
+<p>Docelowy format: biblioteka.</p>
+<p>Narzędzia:</p>
+<ul class="simple">
+<li><p>język: Python</p></li>
+<li><p>środowisko wirtualne: venv</p></li>
+<li><p>autoformatowanie i linter: ruff</p></li>
+<li><p>przetwarzanie: NumPy, MusPy</p></li>
+<li><p>testy: pytest</p></li>
+<li><p>zbieranie logów: logging</p></li>
+<li><p>dokumentacja: sphinx</p></li>
+<li><p>interfejs konsolowy: argparse</p></li>
+<li><p>wizualizacja: matplotlib</p></li>
+</ul>
+</section>
+<section id="harmonogram-i-planowany-postep">
+<h2>Harmonogram i planowany postęp<a class="headerlink" href="#harmonogram-i-planowany-postep" title="Link to this heading"></a></h2>
+<p>Oznaczenia kategorii zadań znajdują się w rozdziale Planowane funkcjonalności. Harmonogram służy jako przewodnik w realizacji projektu i może ulec zmianie. W przypadku decyzji o realizacji opcjonalnego zagadnienia E, oznaczać to będzie zmianę planu dla pewnych tygodni.</p>
+<ul class="simple">
+<li><p>11.03 - 17.03 - szczegółowe zapoznanie się z istniejącym projektem</p></li>
+<li><p>18.03 - 24.03</p></li>
+<li><p>25.03 - 31.03 - Demonstracja postępu analizy literaturowej oraz konfiguracja środowiska wykonawczego</p></li>
+<li><p>01.04 - 07.04 - A</p></li>
+<li><p>08.04 - 14.04 - A</p></li>
+<li><p>15.04 - 21.04 - A/B</p></li>
+<li><p>22.04 - 28.04 - B</p></li>
+<li><p>29.04 - 05.05 - majówka</p></li>
+<li><p>06.05 - 12.05 - B/C</p></li>
+<li><p>13.05 - 19.05 - C</p></li>
+<li><p>20.05 - 26.05 - C</p></li>
+<li><p>27.05 - 02.06 - C/D</p></li>
+<li><p>03.06 - 09.06 - D</p></li>
+<li><p>10.06 - 16.06 - etap finałowy</p></li>
+</ul>
+</section>
+<section id="bibliografia">
+<h2>Bibliografia<a class="headerlink" href="#bibliografia" title="Link to this heading"></a></h2>
+<!-- [^dai2022]: ["What is missing in deep music generation? A study of repetition and structure in popular music", Shuqi Dai & Huiran Yu & Roger B. Dannenberg, 2022](https://arxiv.org/abs/2209.00182)  
+[^chi2020]: ["Generating Music with a Self-Correcting Non-Chronological Autoregressive Model", Wayne Chi et al., 2020](https://arxiv.org/abs/2008.08927)  
+[^dong2020]: ["MusPy: A toolkit for symbolic music generation", Hao-Wen Dong et al., 2020](https://arxiv.org/abs/2008.01951)  
+[^yang2020]: ["On the evaluation of generative models in music", Li-Chia Yang & Alexander Lerch, 2020](https://www.researchgate.net/publication/328728367_On_the_evaluation_of_generative_models_in_music)  
+[^ji2020]: ["A Comprehensive Survey on Deep Music Generation: Multi-level Representations, Algorithms, Evaluations, and Future Directions", Shulei Ji & Jing Luo & Xinyu Yang, 2020](https://arxiv.org/abs/2011.06801)  
+[^xiong2023]: ["A Comprehensive Survey for Evaluation Methodologies of AI-Generated Music", Zeyu Xiong et al., 2023](https://arxiv.org/abs/2308.13736)   -->
+<!-- [^dong2017dataset]: ["Lakh Pianoroll Dataset", Hao-Wen Dong et al., accessed 17.11.2023](https://salu133445.github.io/lakh-pianoroll-dataset/) -->
+<!-- [^bittner2022]: ["A Lightweight Instrument-Agnostic Model for Polyphonic Note Transcription and Multipitch Estimation", Rachel M. Bittner et al., 2022](https://arxiv.org/abs/2203.09893) -->
+<!-- [^gardner2022]: ["MT3: Multi-Task Multitrack Music Transcription", Josh Gardner et al., 2022](https://arxiv.org/abs/2111.03017v4) -->
+<!-- [^bertin-mahieux2011]: ["The Million Song Dataset", Thierry Bertin-Mahieux, 2011](https://academiccommons.columbia.edu/doi/10.7916/D8NZ8J07)
+[^manilow2019]: ["Cutting Music Source Separation Some Slakh: A Dataset to Study the Impact of Training Data Quality and Quantity", Ethan Manilow et al., 2019](https://arxiv.org/abs/1909.08494)
+[^manilow2020]: ["Simultaneous Separation and Transcription of Mixtures with Multiple Polyphonic and Percussive Instruments", Ethan Manilow et al., 2020](https://arxiv.org/abs/1910.12621)
+[^xi2018]: [Guitarset: A Dataset for Guitar Transcription, Qingyang Xi et al., 2018](https://archives.ismir.net/ismir2018/paper/000188.pdf)
+[^li2018]: ["Creating a multi-track classical music performance dataset for multi-modal music analysis: Challenges, insights, and applications", Bochen Li et al., 2018](https://labsites.rochester.edu/air/publications/li2018creating.pdf)
+[^kong2020]: ["High-resolution Piano Transcription with Pedals by Regressing Onset and Offset Times", Qiuqiang Kong et al., 2020](https://arxiv.org/abs/2010.01815) -->
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="back1999" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.music.mcgill.ca/~ich/classes/mumt306/StandardMIDIfileformat.html">“Standard MIDI-File Format Spec. 1.1, updated”, David Back, 1999</a></p>
+</aside>
+<aside class="footnote brackets" id="raffel2016dataset" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://colinraffel.com/projects/lmd/">“The Lakh MIDI Dataset”, Collin Raffel, accessed 14.11.2023</a></p>
+</aside>
+<aside class="footnote brackets" id="raffel2016" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://academiccommons.columbia.edu/doi/10.7916/D8N58MHV">“Learning-Based Methods for Comparing Sequences, with Applications to Audio-to-MIDI Alignment and Matching”, Collin Raffel, 2016</a></p>
+</aside>
+<aside class="footnote brackets" id="hawthorne2019" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://openreview.net/forum?id=r1lYRjC9F7">“Enabling Factorized Piano Music Modeling and Generation with the MAESTRO Dataset”, Curtis Hawthorne et al., 2019</a></p>
+</aside>
+<aside class="footnote brackets" id="donahue2018" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1806.04278">“The NES Music Database: A multi-instrumental dataset with expressive performance attributes”, Donahue et al., 2018</a></p>
+</aside>
+<aside class="footnote brackets" id="thickstun2017" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">6</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1611.09827">“Learning Features of Music from Scratch”, John Thickstun et al., 2017</a></p>
+</aside>
+<aside class="footnote brackets" id="hung2021" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">7</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/2108.01374">“EMOPIA: A Multi-Modal Pop Piano Dataset For Emotion Recognition and Emotion-based Music Generation”, Hsiao-Tzu Hung et al., 2021</a></p>
+</aside>
+<aside class="footnote brackets" id="dong2017" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">8</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1709.06298">“MuseGAN: Multi-track Sequential Generative Adversarial Networks for Symbolic Music Generation and Accompaniment”, Hao-Wen Dong et al., 2017</a></p>
+</aside>
+<aside class="footnote brackets" id="huang2018" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">9</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://arxiv.org/abs/1809.04281">“Music Transformer: Generating music with long-term structure”, Cheng-Zhi Anna Huang et al., 2018</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="LICENSE.html" class="btn btn-neutral float-left" title="Licencja" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/metrics.html" class="btn btn-neutral float-right" title="Metryki" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, WIMU 10 Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <script>createSchemeSwitcher()</script>
+
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metryki &mdash; WIMU 10  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Narzędzia" href="utils.html" />
+    <link rel="prev" title="Design Proposal" href="../DESIGN_PROPOSAL.html" />
+  
+  
+    
+  
+    
+  
+  
+  
+  
+   
+  <link rel="preload" href="../_static/css/fonts/fontawesome-webfont.woff2?af7ae505a9eed503f8b8e6982036873e" as="font">
+  <link rel="stylesheet" href="../_static/css/index.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/dark.css" media="(prefers-color-scheme: dark)" />
+  <script src="../_static/js/scheme-switcher.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            WIMU 10
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Informacje Ogólne</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../LICENSE.html">Licencja</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DESIGN_PROPOSAL.html">Design Proposal</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Dokumentacja API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Metryki</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics.compute_self_similarity"><code class="docutils literal notranslate"><span class="pre">compute_self_similarity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics.dummy_metric"><code class="docutils literal notranslate"><span class="pre">dummy_metric()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics.self_similarity_groups"><code class="docutils literal notranslate"><span class="pre">self_similarity_groups()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics.self_similarity_matrix"><code class="docutils literal notranslate"><span class="pre">self_similarity_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics.self_similarity_score"><code class="docutils literal notranslate"><span class="pre">self_similarity_score()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_chords.chords_histogram"><code class="docutils literal notranslate"><span class="pre">chords_histogram()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_chords.chords_transition_matrix"><code class="docutils literal notranslate"><span class="pre">chords_transition_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_chords.get_chords_list"><code class="docutils literal notranslate"><span class="pre">get_chords_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability"><code class="docutils literal notranslate"><span class="pre">DynamicsVariability</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability.changes_count"><code class="docutils literal notranslate"><span class="pre">DynamicsVariability.changes_count</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability.ratio"><code class="docutils literal notranslate"><span class="pre">DynamicsVariability.ratio</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability.total_count"><code class="docutils literal notranslate"><span class="pre">DynamicsVariability.total_count</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_histogram"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_histogram()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_levels_histogram"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_levels_histogram()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_levels_transition_matrix"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_levels_transition_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_levels_variability"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_levels_variability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_transition_matrix"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_transition_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_dynamics.compute_dynamics_variability"><code class="docutils literal notranslate"><span class="pre">compute_dynamics_variability()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.PartKey"><code class="docutils literal notranslate"><span class="pre">PartKey</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.compute_key_signatures_hist"><code class="docutils literal notranslate"><span class="pre">compute_key_signatures_hist()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.diff_alg_keys"><code class="docutils literal notranslate"><span class="pre">diff_alg_keys()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.diff_alg_keys_music_list"><code class="docutils literal notranslate"><span class="pre">diff_alg_keys_music_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.get_key_from_music21_stream"><code class="docutils literal notranslate"><span class="pre">get_key_from_music21_stream()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.get_key_from_muspy_music"><code class="docutils literal notranslate"><span class="pre">get_key_from_muspy_music()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.get_keys_from_sampled_midi"><code class="docutils literal notranslate"><span class="pre">get_keys_from_sampled_midi()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.key_for_whole_music_matrix"><code class="docutils literal notranslate"><span class="pre">key_for_whole_music_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.key_similarity_matrix"><code class="docutils literal notranslate"><span class="pre">key_similarity_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.keys_in_tracks_matrix"><code class="docutils literal notranslate"><span class="pre">keys_in_tracks_matrix()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_key.similarity_key_score"><code class="docutils literal notranslate"><span class="pre">similarity_key_score()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_tempo.find_tempo"><code class="docutils literal notranslate"><span class="pre">find_tempo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_time_signature.find_time_signature"><code class="docutils literal notranslate"><span class="pre">find_time_signature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_syncopation.calc_syncopation"><code class="docutils literal notranslate"><span class="pre">calc_syncopation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_syncopation.syncopation_by_bar_plot"><code class="docutils literal notranslate"><span class="pre">syncopation_by_bar_plot()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wimu10.metrics_syncopation.syncopation_metrics_chart"><code class="docutils literal notranslate"><span class="pre">syncopation_metrics_chart()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">Narzędzia</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../research/chords-metrics.html">Miary oparte o akordy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/dynamics-metrics.html">Miary oparte o dynamikę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/embeddings.html">Embeddingi CLaMP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/self_similarity.html">Samopodobieństwo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/tokenization.html">Tokenizacja</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Nowe eksperymenty</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../research/key-metrics.html">Miary oparte o tonacje</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/time-signature-metrics.html">Miary oparte o tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/syncope-metrics.html">Miary oparte o synkopę</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/clamp-tests.html">Nowe testy CLaMP</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">WIMU 10</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Metryki</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/metrics.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-wimu10.metrics">
+<span id="metryki"></span><h1>Metryki<a class="headerlink" href="#module-wimu10.metrics" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics.compute_self_similarity">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics.</span></span><span class="sig-name descname"><span class="pre">compute_self_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Track</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kvargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wimu10.metrics.compute_self_similarity" title="Link to this definition"></a></dt>
+<dd><p>Computes a self similarity coverage score from the track. (repeated sections / all sections)</p>
+<p>track: Track to calculate the metric on.
+kvargs: Check intermediate functions for additional arguments.</p>
+<p>returns: 0-1 value</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics.dummy_metric">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics.</span></span><span class="sig-name descname"><span class="pre">dummy_metric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#wimu10.metrics.dummy_metric" title="Link to this definition"></a></dt>
+<dd><p>Dummy metric.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics.self_similarity_groups">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics.</span></span><span class="sig-name descname"><span class="pre">self_similarity_groups</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_length</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Collection[(&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;),</span> <span class="pre">int]</span></span></span><a class="headerlink" href="#wimu10.metrics.self_similarity_groups" title="Link to this definition"></a></dt>
+<dd><p>Extracts groups from similarity matrix based on provided requirements.</p>
+<p>matrix: Self similarity matrix.
+min_length: Minimum length of the repeated fragment. [matrix resolution]
+step: Steps between similarity checks. [matrix resolution]</p>
+<p>returns: Starting points of both fragments together with lengths.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics.self_similarity_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics.</span></span><span class="sig-name descname"><span class="pre">self_similarity_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">track:</span> <span class="pre">~muspy.classes.Track,</span> <span class="pre">resolution:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">16,</span> <span class="pre">squash:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">track_start:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">track_end:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">comparison_fn:</span> <span class="pre">~collections.abc.Callable[[~collections.abc.Collection[int],</span> <span class="pre">~collections.abc.Collection[int]],</span> <span class="pre">int]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">score_perfect_match&gt;,</span> <span class="pre">**_</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">_SupportsArray</span><span class="p"><span class="pre">[</span></span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">_NestedSequence</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">complex</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics.self_similarity_matrix" title="Link to this definition"></a></dt>
+<dd><p>Calculates the top bottom of self similarity matrix.
+The diagonal is unset and the top triangle is symmetrical.</p>
+<p>track: Track to calculate the metric on.
+resolution: How dense the comparison is.
+squash: Whether to squash pitch to a single octave
+track_start: Override for track start
+track_end: Override for trask end
+comparison_fn: Comparison function for 2 points in time</p>
+<p>returns: Self-similarity matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics.self_similarity_score">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics.</span></span><span class="sig-name descname"><span class="pre">self_similarity_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">matrix:</span> <span class="pre">~numpy._typing._array_like._SupportsArray[~numpy.dtype[~typing.Any]]</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[~numpy._typing._array_like._SupportsArray[~numpy.dtype[~typing.Any]]]</span> <span class="pre">|</span> <span class="pre">bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes</span> <span class="pre">|</span> <span class="pre">~numpy._typing._nested_sequence._NestedSequence[bool</span> <span class="pre">|</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">complex</span> <span class="pre">|</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">bytes],</span> <span class="pre">groups:</span> <span class="pre">~collections.abc.Collection[(&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;),</span> <span class="pre">int],</span> <span class="pre">step:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">**_</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wimu10.metrics.self_similarity_score" title="Link to this definition"></a></dt>
+<dd><p>Computes a self similarity coverage score. (repeated sections / all sections)</p>
+<p>matrix: Self similarity matrix.
+groups: Self similarity groups.
+step: Steps between similarity checks.</p>
+<p>returns: 0-1 value</p>
+</dd></dl>
+
+<dl class="py function" id="module-wimu10.metrics_chords">
+<dt class="sig sig-object py" id="wimu10.metrics_chords.chords_histogram">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_chords.</span></span><span class="sig-name descname"><span class="pre">chords_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readable_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'midi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">75</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#wimu10.metrics_chords.chords_histogram" title="Link to this definition"></a></dt>
+<dd><p>Calculates and returns the histogram of chords in the track.
+Returns the values in MIDI note format or in piano key notation.
+Returns ‘None’ in case of ‘readable_output’ value.</p>
+<p>track: Track to retrive the chord histogram from.
+readable_output: Whether to output the given chords
+in MIDI number format or piano key notation.
+error_frame: How much time can pass between single notes for them to still me in the same chord.
+Due to the fact that notes can be inputed with delays(because of the playing style, a human or machine error).
+This value is given to prevent a single bigger chord, where separte notes are played with slight delays and have different timestamps.
+At the time of programming and testing the initial value ‘75’ was set and tested on the ‘musicnet’ dataset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_chords.chords_transition_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_chords.</span></span><span class="sig-name descname"><span class="pre">chords_transition_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readable_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'midi'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">75</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">float64</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#wimu10.metrics_chords.chords_transition_matrix" title="Link to this definition"></a></dt>
+<dd><p>Calculates the transition matrix for the chords in a track.
+Returns dictionary of unique chords and a transition matrix.
+Returns ‘None’ in case of ‘readable_output’ value.</p>
+<p>track: Track to retrive the chord histogram from.
+readable_output: Whether to output the given chords
+in MIDI number format or piano key notation.
+error_frame: How much time can pass between single notes for them to still me in the same chord.
+Due to the fact that notes can be inputed with delays(because of the playing style, human or machine error).
+This value is given to prevent a single bigger chord, where separte notes are played with slight delays and have different timestamps.
+At the time of programming and testing the initial value ‘75’ was set and tested on the ‘musicnet’ dataset.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_chords.get_chords_list">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_chords.</span></span><span class="sig-name descname"><span class="pre">get_chords_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Track</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_frame</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">75</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_chords.get_chords_list" title="Link to this definition"></a></dt>
+<dd><p>Returns list of chords within a track.
+The returned chords are lists of MIDI note numbers.</p>
+<p>track: Track to retrive the chords list from.
+error_frame: How much time can pass between single notes for them to still be in the same chord.
+Due to the fact that notes can be inputed with delays(because of the playing style, human or machine error).
+This value is given to prevent a single bigger chord, where separte notes are played with slight delays and have different timestamps.
+At the time of programming and testing the initial value ‘75’ was set and tested on the ‘musicnet’ dataset.</p>
+</dd></dl>
+
+<dl class="py class" id="module-wimu10.metrics_dynamics">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.DynamicsVariability">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">DynamicsVariability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ratio</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">changes_count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_count</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wimu10.metrics_dynamics.DynamicsVariability" title="Link to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.DynamicsVariability.changes_count">
+<span class="sig-name descname"><span class="pre">changes_count</span></span><a class="headerlink" href="#wimu10.metrics_dynamics.DynamicsVariability.changes_count" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.DynamicsVariability.ratio">
+<span class="sig-name descname"><span class="pre">ratio</span></span><a class="headerlink" href="#wimu10.metrics_dynamics.DynamicsVariability.ratio" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.DynamicsVariability.total_count">
+<span class="sig-name descname"><span class="pre">total_count</span></span><a class="headerlink" href="#wimu10.metrics_dynamics.DynamicsVariability.total_count" title="Link to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_histogram">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_histogram" title="Link to this definition"></a></dt>
+<dd><p>Calculates the histogram of velocities in the track (probed each <cite>resolution</cite> time steps).
+The range of velocity values in MIDI is 0-127.</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: MIDI velocity histogram for the chosen track.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_levels_histogram">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_levels_histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_levels_histogram" title="Link to this definition"></a></dt>
+<dd><p>Calculates the histogram of (configurable) dynamics levels in the track (probed each <cite>resolution</cite> time steps).</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+dynamics_levels: List of starting values for consecutive dynamic levels. The values must be in range 0-127.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: Dynamics level histogram for the chosen track.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_levels_transition_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_levels_transition_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_levels_transition_matrix" title="Link to this definition"></a></dt>
+<dd><p>Calculates the transition matrix for (configurable) dynamics levels of all top-level notes in the track (probed each <cite>resolution</cite> time steps).
+Top-level note is the note that has the highest pitch of all notes played simultaneously in the given moment.</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+dynamics_levels: List of starting values for consecutive dynamic levels. The values must be in range 0-127.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: Dynamics level transition matrix for the chosen track.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_levels_variability">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_levels_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dynamics_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difference_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability" title="wimu10.metrics_dynamics.DynamicsVariability"><span class="pre">DynamicsVariability</span></a></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_levels_variability" title="Link to this definition"></a></dt>
+<dd><p>Calculates the ratio of changes in (configurable) dynamics levels between consecutive top-level notes to all top-level notes (minus one) in the track.
+A separate ratio is given for each difference level (defining how big the change is).
+The track is probed each <cite>resolution</cite> time steps.
+Top-level note is the note that has the highest pitch of all notes played simultaneously in the given moment.</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+dynamics_levels: List of starting values for consecutive dynamic levels. The values must be in range 0-127.
+difference_levels: List of starting values for consecutive levels of absolute differences between velocities. The values must be in range 1-127.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: Ratio of dynamics levels changes for the chosen track.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_transition_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_transition_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">int32</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_transition_matrix" title="Link to this definition"></a></dt>
+<dd><p>Calculates the transition matrix for velocities of all top-level notes in the track (probed each <cite>resolution</cite> time steps).
+The range of velocity values in MIDI is 0-127.
+Top-level note is the note that has the highest pitch of all notes played simultaneously in the given moment.</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: MIDI velocity transition matrix for the chosen track.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_dynamics.compute_dynamics_variability">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_dynamics.</span></span><span class="sig-name descname"><span class="pre">compute_dynamics_variability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_idx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">difference_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">track_end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#wimu10.metrics_dynamics.DynamicsVariability" title="wimu10.metrics_dynamics.DynamicsVariability"><span class="pre">DynamicsVariability</span></a></span></span><a class="headerlink" href="#wimu10.metrics_dynamics.compute_dynamics_variability" title="Link to this definition"></a></dt>
+<dd><p>Calculates the ratio of changes in velocity between consecutive top-level notes to all top-level notes in the track.
+A separate ratio is given for each difference level (defining how big the change is).
+The track is probed each <cite>resolution</cite> time steps.
+The range of velocity values in MIDI is 0-127.
+Top-level note is the note that has the highest pitch of all notes played simultaneously in the given moment.</p>
+<p>music: Piece of music containing the track.
+track_idx: The index of the track to calculate the metric on.
+difference_levels: List of starting values for consecutive levels of absolute differences between velocities. The values must be in range 1-127.
+resolution: How dense the time scale is.
+track_start: Override for track start.
+track_end: Override for trask end.</p>
+<p>returns: Ratio of velocity changes for the chosen track.</p>
+</dd></dl>
+
+<dl class="py class" id="module-wimu10.metrics_key">
+<dt class="sig sig-object py" id="wimu10.metrics_key.PartKey">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">PartKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">begin</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wimu10.metrics_key.PartKey" title="Link to this definition"></a></dt>
+<dd><p>Class containing part of music key and beginning time</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.compute_key_signatures_hist">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">compute_key_signatures_hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.compute_key_signatures_hist" title="Link to this definition"></a></dt>
+<dd><p>Function for keys in music histogram computing</p>
+<p>key_list: list with PartKeys of music track</p>
+<p>returns: tuple of two lists. First list with amount of each key in track and second with key names</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.diff_alg_keys">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">diff_alg_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.diff_alg_keys" title="Link to this definition"></a></dt>
+<dd><p>Function for getting single keys for track from all algorithms</p>
+<p>music: muspy Music class with symbolic music</p>
+<p>returns: numpy array where rows are keys and columns are algorithms</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.diff_alg_keys_music_list">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">diff_alg_keys_music_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Music</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.diff_alg_keys_music_list" title="Link to this definition"></a></dt>
+<dd><p>Function for getting normalised value of keys amount from different keys algorithm for whole track</p>
+<p>music_list: list with tracks in muspy Music classes</p>
+<p>returns: numpy array with normalised value of keys amount from different keys algorithm for whole track</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.get_key_from_music21_stream">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">get_key_from_music21_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'key.aarden'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.get_key_from_music21_stream" title="Link to this definition"></a></dt>
+<dd><p>Function for key from music getting via music21 library</p>
+<p>stream: music21 stream with symbolic music
+alg_name: Name of algorithm from music21 library for key extraction</p>
+<p>returns: tuple of key name, correlation coefficient and tonal certainty</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.get_key_from_muspy_music">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">get_key_from_muspy_music</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Music</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'key.aarden'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.get_key_from_muspy_music" title="Link to this definition"></a></dt>
+<dd><p>Function for key from music getting via music21 library</p>
+<p>music: muspy Music with symbolic music
+alg_name: Name of algorithm from music21 library for key extraction</p>
+<p>returns: tuple of key name, correlation coefficient and tonal certainty</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.get_keys_from_sampled_midi">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">get_keys_from_sampled_midi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">midi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MidiFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alg_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'key.aarden'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_change</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.get_keys_from_sampled_midi" title="Link to this definition"></a></dt>
+<dd><p>Function for computing PartKeys  from track</p>
+<p>midi: mido MidiFile with midi track
+sample_duration: duration of sample from track which is used for key computing
+alg_name: Name of algorithm from music21 library for key extraction
+only_change: left only new keys in list</p>
+<p>returns: List of PartKeys</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.key_for_whole_music_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">key_for_whole_music_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">music_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Music</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'key.aarden'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.key_for_whole_music_matrix" title="Link to this definition"></a></dt>
+<dd><p>Function for creating matrix with key from whole track computed by selected algorithm</p>
+<p>music_list: list with tracks in muspy Music classes
+alg_name: Name of algorithm from music21 library for key extraction</p>
+<p>returns: numpy array where rows are possible keys, columns are tracks</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.key_similarity_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">key_similarity_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.key_similarity_matrix" title="Link to this definition"></a></dt>
+<dd><p>Function for key similarity matrix computing</p>
+<p>track_list: list of tracks containing list of track PartKeys</p>
+<p>returns: numpy array with similaritie scores rows and columns are music tracs</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.keys_in_tracks_matrix">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">keys_in_tracks_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">track_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_key.keys_in_tracks_matrix" title="Link to this definition"></a></dt>
+<dd><p>Function for computing matrix of keys amount in tracks</p>
+<p>track_list: list of tracks containing list of track PartKeys
+norm: bool value if matrix should contain normalised values</p>
+<p>returns: matrix where rows are keys and columns are tracks</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_key.similarity_key_score">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_key.</span></span><span class="sig-name descname"><span class="pre">similarity_key_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key_list1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_list2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#wimu10.metrics_key.PartKey" title="wimu10.metrics_key.PartKey"><span class="pre">PartKey</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#wimu10.metrics_key.similarity_key_score" title="Link to this definition"></a></dt>
+<dd><p>Function for similarity score computing. It tests if music have in the same time same key</p>
+<p>key_list1: list with PartKeys of first music
+key_list2: list with PartKeys of second music</p>
+<p>returns: score in float</p>
+</dd></dl>
+
+<dl class="py function" id="module-wimu10.metrics_tempo">
+<dt class="sig sig-object py" id="wimu10.metrics_tempo.find_tempo">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_tempo.</span></span><span class="sig-name descname"><span class="pre">find_tempo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">midi_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wimu10.metrics_tempo.find_tempo" title="Link to this definition"></a></dt>
+<dd><p>Gathers information about music tempo from a MIDI file</p>
+<p>midi_file_path: specify a path to the file you want to analyze</p>
+<p>returns: list of time offsets when the data appears, list of tempo values throughout the file</p>
+</dd></dl>
+
+<dl class="py function" id="module-wimu10.metrics_time_signature">
+<dt class="sig sig-object py" id="wimu10.metrics_time_signature.find_time_signature">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_time_signature.</span></span><span class="sig-name descname"><span class="pre">find_time_signature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">midi_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#wimu10.metrics_time_signature.find_time_signature" title="Link to this definition"></a></dt>
+<dd><p>Gathers information about time signature from a MIDI file</p>
+<p>midi_file_path: specify a path to the file you want to analyze</p>
+<p>returns: list of time offsets when the data appears, list of time signature values throughout the file</p>
+</dd></dl>
+
+<dl class="py function" id="module-wimu10.metrics_syncopation">
+<dt class="sig sig-object py" id="wimu10.metrics_syncopation.calc_syncopation">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_syncopation.</span></span><span class="sig-name descname"><span class="pre">calc_syncopation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debugPrint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#wimu10.metrics_syncopation.calc_syncopation" title="Link to this definition"></a></dt>
+<dd><p>Calculates syncopation using one of SynPy models.</p>
+<p>model: model name (as str) compatible with available SynPy models (SYNCOPATION_MODELS const)
+file_path: path for imput midi file
+outfile: optional path to save output as a json file</p>
+<p>returns: SYNCOPATION_DATA: dictionary with data generated by chosen model</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_syncopation.syncopation_by_bar_plot">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_syncopation.</span></span><span class="sig-name descname"><span class="pre">syncopation_by_bar_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#wimu10.metrics_syncopation.syncopation_by_bar_plot" title="Link to this definition"></a></dt>
+<dd><p>Generates a bar plot with syncopation value of each bar.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wimu10.metrics_syncopation.syncopation_metrics_chart">
+<span class="sig-prename descclassname"><span class="pre">wimu10.metrics_syncopation.</span></span><span class="sig-name descname"><span class="pre">syncopation_metrics_chart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#wimu10.metrics_syncopation.syncopation_metrics_chart" title="Link to this definition"></a></dt>
+<dd><p>Generates a bar plot with syncopation values (max, mean, mean of non-zero bars) and percentage of bars with a syncope.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../DESIGN_PROPOSAL.html" class="btn btn-neutral float-left" title="Design Proposal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="utils.html" class="btn btn-neutral float-right" title="Narzędzia" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, WIMU 10 Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+    <script>createSchemeSwitcher()</script>
+
+
+</body>
+</html>
