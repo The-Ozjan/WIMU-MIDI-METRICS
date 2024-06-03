@@ -10,18 +10,18 @@ Podczas badania CLaMP sprawdzane było jak radzi on sobie z zadaniami wyszukiwan
 
 Dla tekstowego zapytania "*This song genre is Country*"
 
-![imgclamp](../../images/This%20song%20genre%20is%20Country.png)
+![imgclamp](../../images/This_song_genre_is_Country.png)
 
 Dla tekstowego zapytania "*This song is from movie*"
 
-![imgclamp](../../images/This%20song%20is%20from%20movie.png)
+![imgclamp](../../images/This_song_is_from_movie.png)
 
 Dla piosenki "*Call Me Maybe.mxl*"
 
-![imgclamp](../../images/Call%20Me%20Maybe.mxl.png)
+![imgclamp](../../images/Call_Me_Maybe.mxl.png)
 
 Porównanie muzyki " *Godfather Theme.mxl*" do innych
-![imgclamp](../../images/m2mThe%20Godfather%20Theme.mxl.png)
+![imgclamp](../../images/m2mThe_Godfather_Theme.mxl.png)
 ## Rozwinięcie badań nad embeddingami
 
 Jako rozwinięcie wcześniejszych badań nad embedingami CLaMPa, które sprawdzały wariancję embedingów, wyznaczona została średnia odległość kosinusowa dla danego twórcy i zapytania tekstowego. Przykładowa tabela dla zapytania "It is composed by Johannes Brahms"
