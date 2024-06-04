@@ -6,7 +6,7 @@ Projekt realizowany przez zespół nr 6 w składzie:
 - Wiktor Targosiński
 - Hubert Wysocki
 
-[Design proposal](DESIGN_PROPOSAL.md) [Dokumentacja](docs/generated/html/index.html)
+[Design proposal](DESIGN_PROPOSAL.md) [Dokumentacja](https://hubbi1.github.io)
 
 ## Planowane funkcjonalności
 
